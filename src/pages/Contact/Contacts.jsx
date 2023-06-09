@@ -59,7 +59,7 @@ const Contacts = () => {
         <div className="item">
         <ul>
             <li>How To Find Us</li>
-            <li>Kirinya University,Kutus</li> 
+            <li>Kirinyaga University,Kutus</li> 
             <li>Kerugoya,Kenya</li>
             <li>Phone: +254 712 345 678</li>
             <li>P.O BOX 143-10300 Kerugoya</li>

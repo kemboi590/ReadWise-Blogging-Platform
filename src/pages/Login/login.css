@@ -1,0 +1,18 @@
+.loginPage{
+    height: 100vh;
+}
+.loginTitle{
+    font-size: 3rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+/* forgot password  button*/
+.forgotPassword{
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 2rem;
+    cursor: pointer;
+
+}
