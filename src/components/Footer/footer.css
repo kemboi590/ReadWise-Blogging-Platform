@@ -1,0 +1,15 @@
+
+.myFooter{
+    background-color: #343a40;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 15px;
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+}
+.myFooter li{
+    display: inline-block;
+    margin: 0 10px;
+}
