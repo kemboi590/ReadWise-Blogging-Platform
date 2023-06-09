@@ -1,3 +1,9 @@
+.icon{
+    font-size: 30px;
+    color: #ffffff;
+    cursor: pointer;
+    border-radius: 10px;
+}
 #nav{
     background-color: #343a40;
     color: #ffffff;

@@ -63,7 +63,7 @@ const Contacts = () => {
             <li>Kerugoya,Kenya</li>
             <li>Phone: +254 712 345 678</li>
             <li>P.O BOX 143-10300 Kerugoya</li>
-            <li>Email: blogwise@thejitu.com </li>
+            <li>Email: hello@blogwise.com </li>
           </ul>
 
         </div>
