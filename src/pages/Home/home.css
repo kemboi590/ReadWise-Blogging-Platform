@@ -1,11 +1,70 @@
 
   
 .homePage {
-    background-image: url("../../images/lamp.jpg");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),url("../../images/lamp.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     height: 100vh;
     width: 100%;
+    /* center divs in home page */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+  }
+
+  .intro{
+    color: #ffffff;
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
+
+    animation: fadeInUp 1s ease forwards;
+   
+  }
+ 
+.CreateBlog{
+    color: #ffffff;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    margin: 0 auto;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #343a40;
+    width: 400px;
+    margin-top: 100px;
+    cursor: pointer;
+
+    animation: fadeInUp 1s ease 1s forwards;
+
+   
+}
+.CreateBlog:hover{
+    background-color: #ffffff;
+    color: #343a40;
+    transition: 0.5s;
+}   
+
+.intro,
+.CreateBlog {
+  animation: fadeInUp 1s ease forwards;
+}
+
+@keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
   
+
+
+
+
