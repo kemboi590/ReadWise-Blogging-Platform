@@ -36,7 +36,7 @@ const Contacts = () => {
 
         <div className="Form">
           
-     
+     {/* contact form */}
            <form onSubmit={handleSubmit(sendDataToServer)}>
         <>
           <input type="text" placeholder='Your full name' {...register("fullname")} />
