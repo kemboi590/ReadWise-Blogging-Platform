@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 // import the icon.png
 import icon from '../../images/icon.jpeg'
 
+
 function Navbar() {
   return (
     <div id='nav'>
