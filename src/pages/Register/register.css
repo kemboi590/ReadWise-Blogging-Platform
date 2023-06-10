@@ -1,11 +1,11 @@
-.registrationPage{
-    height: 100vh;
+.registrationPage {
+  height: 100vh;
 }
 
-.registrationTitle{
-    font-size: 3rem;
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 2rem;
-    margin-top: 1rem;
+.registrationTitle {
+  font-size: 3rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2rem;
+  margin-top: 1rem;
 }

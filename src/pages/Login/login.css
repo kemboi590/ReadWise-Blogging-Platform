@@ -1,21 +1,20 @@
-.loginPage{
-    height: 90vh;
+.loginPage {
+  height: 90vh;
 }
-.loginTitle{
-    font-size: 3rem;
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 2rem;
-    margin-top: 1rem;
-   
+.loginTitle {
+  font-size: 3rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2rem;
+  margin-top: 1rem;
 }
 /* forgot password  button*/
 
-.toLogIn{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-    cursor: pointer;
-    margin: 1rem
+.toLogIn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  cursor: pointer;
+  margin: 1rem;
 }
