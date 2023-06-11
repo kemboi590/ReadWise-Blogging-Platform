@@ -30,13 +30,19 @@ function Login() {
     <div className="loginPage">
       <h2 className="loginTitle">LOG-IN</h2>
 
-      <form onSubmit={handleSubmit(sendDataToServer)}>
+      <form onSubmit={handleSubmit(sendDataToServer)} className="myForm">
         <>
-          <input type="email" placeholder="Your email" {...register("email")} />
+          <input
+            type="email"
+            placeholder="Your email"
+            {...register("email")}
+            className="inputField"
+          />
           <p>{errors.email?.message}</p>
         </>
         <>
           <input
+            className="inputField"
             type="password"
             placeholder="Your password"
             {...register("password")}

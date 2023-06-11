@@ -34,15 +34,16 @@ const Contacts = () => {
       {/* Contact Form */}
       <div className="forFormGif">
         {/* Contact Gif */}
-        <div className="contactGit">
+        <div className="contactGif">
           <img src={conactImg} alt="conactImg" />
         </div>
 
         <div className="Form">
           {/* contact form */}
-          <form onSubmit={handleSubmit(sendDataToServer)}>
+          <form onSubmit={handleSubmit(sendDataToServer)} className="myForm">
             <>
               <input
+                className="inputField"
                 type="text"
                 placeholder="Your full name"
                 {...register("fullname")}
@@ -51,6 +52,7 @@ const Contacts = () => {
             </>
             <>
               <input
+                className="inputField"
                 type="email"
                 placeholder="Your email"
                 {...register("email")}
@@ -58,7 +60,11 @@ const Contacts = () => {
               <p>{errors.email?.message}</p>
             </>
             <>
-              <textarea placeholder="Your message" {...register("message")} />
+              <textarea
+                placeholder="Your message"
+                {...register("message")}
+                className="myTextArea"
+              />
               <p> {errors.message?.message} </p>
             </>
             <input type="submit" value="submit" className="submitbtn" />

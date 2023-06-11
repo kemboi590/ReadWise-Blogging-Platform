@@ -9,11 +9,21 @@
   margin-bottom: 2rem;
   margin-top: 1rem;
 }
+.subTitle {
+  text-align: center;
+  padding: 1rem;
+}
+
+.aboutTextImage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
 
 .aboutImage {
-  width: 800px;
-  margin-left: 20px;
-  margin-top: 20px;
+  width: 570px;
 }
 
 .aboutImage img {
@@ -22,21 +32,51 @@
 }
 
 .aboutText {
-  position: relative;
   text-align: justify;
-  width: 60%;
+  width: 50%;
   border: 1px solid #393e39;
   border-radius: 5px;
-  padding: 15px;
-  margin-top: -300px;
-  margin-left: auto;
+  padding: 12px;
   background-color: #e7ece7;
   margin-bottom: 20px;
-  margin-right: 50px;
+}
+.aboutUl {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem 0;
+  gap: 1rem;
 }
 
 .aboutText p {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 500;
-  line-height: 1.5;
+  line-height: 1;
+}
+
+@media screen and (max-width: 1140px) {
+  .aboutImage {
+    width: 400px;
+  }
+}
+@media screen and (max-width: 1020px) {
+  .aboutTextImage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+  .aboutImage {
+    width: 90%;
+  }
+  .aboutText {
+    width: 90%;
+  }
+  .aboutUl {
+    gap: 0.6rem;
+  }
+  .subTitle {
+    padding: 0.6rem;
+  }
 }

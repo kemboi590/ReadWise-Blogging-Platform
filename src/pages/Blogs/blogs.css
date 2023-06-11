@@ -50,3 +50,29 @@
 .blogImg img {
   width: 80px;
 }
+
+@media screen and (max-width: 630px) {
+  .blogsTitle {
+    font-size: 2rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    margin-top: 0.5rem;
+  }
+  .mainBlog {
+    flex-direction: column;
+  }
+  .containTitleContent {
+    width: 100%;
+  }
+  .description {
+    margin-top: 10px;
+  }
+  .blogImg {
+    width: 100%;
+  }
+  .blogImg img {
+    margin-top: 10px;
+    width: 100px;
+    border-radius: 7px;
+  }
+}
