@@ -10,7 +10,6 @@
 .contain_navLinks {
   background-color: #343a40;
   color: #ffffff;
-  padding: 10px;
   display: flex;
   justify-content: space-around;
   height: 100%;
@@ -63,7 +62,6 @@
 
   .linkitem {
     font-size: 24px;
-
     border: 1px solid white;
   }
 

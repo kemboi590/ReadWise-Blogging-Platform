@@ -1,0 +1,89 @@
+.EditorContainer {
+  width: 70%;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+/* 
+6ysspo305d6uqauwzwnfy7ormdyq073g8jpw0gohu2a3m2gp
+*/
+
+.titleToWriteBlog {
+  font-size: 25px;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  margin: 0.5rem;
+  padding: 10px;
+  /* give some letter spacing */
+  letter-spacing: 1px;
+}
+.form-field {
+  margin-bottom: 10px;
+}
+.form-field label {
+  display: block;
+  margin-bottom: 5px;
+}
+.titleBlog {
+  width: 100%;
+  height: 40px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+}
+.textDesc {
+  width: 100%;
+  height: 70px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+}
+
+.publish {
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  margin: 0 auto;
+  padding: 7px;
+  border-radius: 5px;
+  background-color: #343a40;
+  width: 150px;
+  cursor: pointer;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+}
+.publish:hover {
+  background-color: #ffffff;
+  color: #343a40;
+}
+
+@media screen and (max-width: 1144px) {
+  .EditorContainer {
+    width: 90%;
+  }
+}
+@media screen and (max-width: 992px) {
+  .EditorContainer {
+    width: 97%;
+  }
+}
+@media screen and (max-width: 882px) {
+  .titleToWriteBlog {
+    font-size: 20px;
+    font-weight: 400;
+  }
+}
+@media screen and (max-width: 882px) {
+  .titleToWriteBlog {
+    font-size: 17px;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    margin: 0.5rem;
+    padding: 10px;
+    letter-spacing: 1px;
+  }
+}

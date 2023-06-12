@@ -72,6 +72,9 @@ function Register() {
           />
           <p>{errors.confirmPassword?.message}</p>
         </>
+        <div className="toLogIn">
+          <h4 className="noAccount">Already have an account?</h4>
+        </div>
         <input type="submit" value="REGISTER" className="submitbtn" />
       </form>
     </div>

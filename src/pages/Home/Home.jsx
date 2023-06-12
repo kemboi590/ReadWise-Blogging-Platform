@@ -1,5 +1,6 @@
 import React from "react";
 import "./home.css";
+import { Link } from "react-router-dom";
 
 function Home() {
   return (
@@ -10,8 +11,8 @@ function Home() {
         </h1>
         <h4 className="subTitle">Learn by Stuying more</h4>
       </div>
-
-      <h4 className="CreateBlog">Create Your Blog</h4>
+      <Link to="/createblog" > <h4 className="CreateBlog">   Create Blog </h4> </Link>
+   
     </div>
   );
 }

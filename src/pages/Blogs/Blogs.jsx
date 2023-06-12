@@ -1,5 +1,6 @@
 import React from "react";
 import "./blogs.css";
+import { Link } from 'react-router-dom'
 
 import blogData from "./blogData";
 
@@ -7,6 +8,10 @@ function Blogs() {
   return (
     <div className="blogsPage">
       <h2 className="blogsTitle">ReadWise Blogs</h2>
+      <Link to="/createblog" > <h4 className="create">   Create a Blog </h4>
+      
+      </Link>
+      {/* <h4 >Create Your Blog</h4> */}
       <div className="allBlogs">
         {blogData.map(
           ({

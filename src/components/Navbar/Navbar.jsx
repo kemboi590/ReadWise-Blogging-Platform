@@ -14,28 +14,28 @@ function Navbar() {
       <div className={`contain_navLinks ${isOpen ? "show" : ""} `}>
         <img src={icon} alt="icon" className="icon" width="50px" />
 
-        <Link to="/" className="linkitem">
-          Home
+        <Link to="/">
+          <li className="linkitem"> Home </li>
         </Link>
 
-        <Link to="/about" className="linkitem">
-          About
+        <Link to="/about">
+          <li className="linkitem"> About</li>
         </Link>
 
-        <Link to="/blogs" className="linkitem">
-          Blogs
+        <Link to="/blogs">
+          <li className="linkitem"> Blogs </li>
         </Link>
 
-        <Link to="/contacts" className="linkitem">
-          Contacts
+        <Link to="/contacts">
+          <li className="linkitem">Contacts </li>
         </Link>
 
-        <Link to="/register" className="linkitem">
-          Register
+        <Link to="/register">
+          <li className="linkitem"> Register</li>
         </Link>
 
-        <Link to="/login" className="linkitem">
-          Login
+        <Link to="/login">
+          <li className="linkitem"> Login </li>
         </Link>
       </div>
       <div className="burger">
