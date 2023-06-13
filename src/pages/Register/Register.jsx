@@ -35,10 +35,10 @@ function Register() {
     <div className="registrationPage">
       <h2 className="registrationTitle">REGISTER</h2>
 
-      <form onSubmit={handleSubmit(sendDataToServer)} className="myForm">
+      <form onSubmit={handleSubmit(sendDataToServer)} className="myFormLogin">
         <>
           <input
-            className="inputField"
+            className="inputFieldLogin"
             type="text"
             placeholder="Your full name"
             {...register("fullname")}
@@ -47,7 +47,7 @@ function Register() {
         </>
         <>
           <input
-            className="inputField"
+            className="inputFieldLogin"
             type="email"
             placeholder="Your email"
             {...register("email")}
@@ -56,7 +56,7 @@ function Register() {
         </>
         <>
           <input
-            className="inputField"
+            className="inputFieldLogin"
             type="password"
             placeholder="Your password"
             {...register("password")}
@@ -65,7 +65,7 @@ function Register() {
         </>
         <>
           <input
-            className="inputField"
+            className="inputFieldLogin"
             type="password"
             placeholder="Confirm your password"
             {...register("confirmPassword")}
