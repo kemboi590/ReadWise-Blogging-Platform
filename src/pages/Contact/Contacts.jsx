@@ -4,6 +4,11 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
+import { ImFacebook2 } from "react-icons/im";
+import { FaTwitterSquare } from "react-icons/fa";
+import { FaInstagramSquare } from "react-icons/fa";
+import { FaLinkedin } from "react-icons/fa";
+
 // import contactgit image
 import conactImg from "../../images/contactgif.gif";
 
@@ -96,11 +101,19 @@ const Contacts = () => {
 
         <div className="item">
           <ul>
-            <li>Connect on Social Media</li>
-            <li>Facebook</li>
-            <li>Twitter</li>
-            <li>Instagram</li>
-            <li>LinkedIn</li>
+            <li>Follow Us</li>
+            <li>
+              <ImFacebook2 />
+            </li>
+            <li>
+              <FaTwitterSquare />
+            </li>
+            <li>
+              <FaInstagramSquare />
+            </li>
+            <li>
+              <FaLinkedin />
+            </li>
           </ul>
         </div>
       </div>

@@ -11,8 +11,9 @@ function Home() {
         </h1>
         <h4 className="subTitle">Learn by Stuying more</h4>
       </div>
-      <Link to="/createblog" > <h4 className="CreateBlog">   Create Blog </h4> </Link>
-   
+      <Link to="/createblog">
+        <h4 className="CreateBlog"> Create Blog </h4>
+      </Link>
     </div>
   );
 }

@@ -1,6 +1,11 @@
 import React from "react";
 import "./about.css";
 import aboutImg from "../../images/aboutUs.jpg";
+import { ImFacebook2 } from "react-icons/im";
+// import { FaSquareTwitter } from "react-icons/fa";
+import { FaTwitterSquare } from "react-icons/fa";
+import { FaInstagramSquare } from "react-icons/fa";
+import {FaLinkedin} from "react-icons/fa";
 
 function About() {
   return (
@@ -13,17 +18,25 @@ function About() {
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis
             consequatur ipsa voluptate ex sint maxime error ab velit placeat.
             Explicabo fugiat similique nam repellat recusandae quis sint
-            veritatis laboriosam praesentium! Magnam expedita dolores eos,{" "}
+            veritatis laboriosam praesentium! Magnam expedita dolores eos,
             <br /> <br />
             odit dolor saepe voluptatem sint sit deleniti laborum corrupti?
             Earum, porro nulla iusto officia dicta asperiores aperiam debitis
             fugit hic architecto, delectus nostrum deleniti sequi ut? Officia
             dolorem assumenda distinctio quasi sunt aliquid, esse,
             <ul className="aboutUl">
-              <li>Facebook</li>
-              <li>Twitter</li>
-              <li>Instagram</li>
-              <li>LinkedIn</li>
+              <li>
+                <ImFacebook2 />
+              </li>
+              <li>
+                <FaTwitterSquare />
+              </li>
+              <li>
+                <FaInstagramSquare />
+              </li>
+              <li>
+                <FaLinkedin />
+              </li>
             </ul>
           </p>
         </div>
