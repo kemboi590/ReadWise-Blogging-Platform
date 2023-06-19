@@ -4,6 +4,10 @@ import {
   getSingleBlog,
   updateBlog,
   deleteBlog,
+  getComments,
+  createComment,
+  updateComment,
+  deleteComment,
 } from "./../controllers/blogController.js";
 
 import {
@@ -12,18 +16,21 @@ import {
   loginRequired,
 } from "./../controllers/userController.js";
 const blogs = (app) => {
-  //get and post request for /blogs endpoint
+  //blog routes
   app.route("/blogs").get(getBlogs).post(createBlog);
-  //get, put and delete request for /blogs/:id endpoint
-  app
-    .route("/blogs/:id")
-    .get(getSingleBlog)
-    .put(updateBlog)
-    .delete(deleteBlog);
+  app.route("/blogs/:id").get(getSingleBlog).put(updateBlog).delete(deleteBlog);
+  //comment routes
+  app.route("/comments").post(createComment); //create comment to a post
+
+  app.route("/comments/:id").get(getComments); //get comments of a post
+
+  app.route("/comments/:id").put(updateComment); //update comment
 
   //register route
   app.route("/auth/register").post(registerUser);
   //login route
   app.route("/auth/login").post(loginUser);
+  //delete comment
+  app.route("/comments/:id").delete(deleteComment);
 };
 export default blogs;
