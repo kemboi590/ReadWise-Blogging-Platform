@@ -13,11 +13,11 @@ import {
 } from "./../controllers/userController.js";
 const blogs = (app) => {
   //get and post request for /blogs endpoint
-  app.route("/blogs").get(loginRequired, getBlogs).post(createBlog);
+  app.route("/blogs").get(getBlogs).post(createBlog);
   //get, put and delete request for /blogs/:id endpoint
   app
     .route("/blogs/:id")
-    .get(loginRequired, getSingleBlog)
+    .get(getSingleBlog)
     .put(updateBlog)
     .delete(deleteBlog);
 
