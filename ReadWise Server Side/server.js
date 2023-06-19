@@ -1,12 +1,17 @@
 import express from "express";
 import config from "./src/db/config.js";
-import blogs from "./src/routes/routes.js";
-import bodyParser from "body-parser";
 import jwt from "jsonwebtoken";
 
+//importing routes
+import blogs from "./src/routes/postRoute.js";
+import user from "./src/routes/userRoute.js";
+import bodyParser from "body-parser";
+import comments from "./src/routes/CommentsRoute.js";
+
+//invoke express
 const app = express();
 
-//middleware
+//built inmiddleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -33,8 +38,12 @@ app.use((req, res, next) => {
   }
 });
 
+//allow routes access express
 blogs(app);
+user(app);
+comments(app);
 
+//port
 app.listen(config.port, () => {
   console.log(`Server running at ${config.url}`);
 });
