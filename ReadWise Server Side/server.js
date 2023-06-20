@@ -8,6 +8,7 @@ import user from "./src/routes/userRoute.js";
 import bodyParser from "body-parser";
 import comments from "./src/routes/CommentsRoute.js";
 
+
 //invoke express
 const app = express();
 
@@ -15,6 +16,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
 
 //JWT middleware
 app.use((req, res, next) => {
