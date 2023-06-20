@@ -1,16 +1,13 @@
-
 import {
-    registerUser,
-    loginUser,
-    loginRequired,
+  registerUser,
+  loginUser,
+  loginRequired,
 } from "../controllers/userController.js";
-  
 
 const user = (app) => {
-      //register route
+  //register route
   app.route("/auth/register").post(registerUser);
   //login route
   app.route("/auth/login").post(loginUser);
-
-}
-export default user
+};
+export default user;

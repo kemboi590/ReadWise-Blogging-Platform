@@ -14,7 +14,7 @@ export const loginRequired = (req, res, next) => {
 
 //register user
 export const registerUser = async (req, res) => {
-  const { UserName, Email, password } = req.body;
+  const { UserName, Email, Role, password } = req.body;
   const hashedPassword = bcrypt.hashSync(password, 10);
   console.log(UserName, Email, hashedPassword);
   try {
@@ -25,7 +25,7 @@ export const registerUser = async (req, res) => {
       .input("UserName", sql.VarChar, UserName)
       .input("Email", sql.VarChar, Email)
       .query(
-        "SELECT * FROM UserCredentials WHERE UserName = @UserName AND Email = @Email"
+        "SELECT * FROM Users WHERE UserName = @UserName AND Email = @Email"
       );
     const user = result.recordset[0];
     if (user) {
@@ -36,9 +36,10 @@ export const registerUser = async (req, res) => {
         .request()
         .input("UserName", sql.VarChar, UserName)
         .input("Email", sql.VarChar, Email)
+        .input("Role", sql.VarChar, Role)
         .input("hashedPassword", sql.VarChar, hashedPassword)
         .query(
-          "INSERT INTO UserCredentials (UserName,Email, hashedPassword) VALUES (@UserName,@Email, @hashedPassword)"
+          "INSERT INTO Users (UserName,Email,Role, hashedPassword) VALUES (@UserName,@Email,@Role, @hashedPassword)"
         );
       res.status(200).json("User created successfully");
     }
@@ -56,7 +57,7 @@ export const loginUser = async (req, res) => {
     let result = await pool
       .request()
       .input("Email", sql.VarChar, Email)
-      .query("SELECT * FROM UserCredentials WHERE Email = @Email");
+      .query("SELECT * FROM Users WHERE Email = @Email");
     const user = result.recordset[0];
     if (!user) {
       return res.status(401).json("User does not exist");
