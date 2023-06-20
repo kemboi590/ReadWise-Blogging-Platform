@@ -29,7 +29,7 @@ export const registerUser = async (req, res) => {
       );
     const user = result.recordset[0];
     if (user) {
-      return res.status(409).json("User already exists");
+      return res.status(409).json({ error: "User already exists" });
     } else {
       //if user does not exist
       await pool
@@ -41,7 +41,7 @@ export const registerUser = async (req, res) => {
         .query(
           "INSERT INTO Users (UserName,Email,Role, hashedPassword) VALUES (@UserName,@Email,@Role, @hashedPassword)"
         );
-      res.status(200).json("User created successfully");
+      res.status(200).json({ message: "User created successfully" });
     }
   } catch (error) {
     res.status(409).json(error.message);
@@ -60,7 +60,7 @@ export const loginUser = async (req, res) => {
       .query("SELECT * FROM Users WHERE Email = @Email");
     const user = result.recordset[0];
     if (!user) {
-      return res.status(401).json("User does not exist");
+      return res.status(401).json({ message: "User does not exist" });
     } else {
       if (!bcrypt.compareSync(password, user.hashedPassword)) {
         return res.status(401).json("Incorrect password");
