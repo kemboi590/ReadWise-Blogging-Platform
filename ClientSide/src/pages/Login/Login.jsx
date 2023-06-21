@@ -32,6 +32,7 @@ function Login() {
       .then(({ data }) => {
         if (data.token) {
           navigate("/");
+          console.log(user)
           dispatch({type: "LOGIN_SUCCESS", payload: data});
         }
       })
