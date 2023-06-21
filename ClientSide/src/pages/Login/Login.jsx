@@ -6,6 +6,8 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom"; //import useNavigate
+import { useContext } from "react";
+import { Context } from "../../context/userContext/Context";
 
 const schema = yup.object().shape({
   Email: yup.string().email("Email is invalid").required("Email is required"),
@@ -16,6 +18,7 @@ const schema = yup.object().shape({
 });
 
 function Login() {
+  const {user, dispatch} = useContext(Context);
   const navigate = useNavigate();
   const {
     register,
@@ -29,6 +32,7 @@ function Login() {
       .then(({ data }) => {
         if (data.token) {
           navigate("/");
+          dispatch({type: "LOGIN_SUCCESS", payload: data});
         }
       })
       .catch(({ response }) => {

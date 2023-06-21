@@ -28,9 +28,13 @@ function BlogPosts() {
         <img src={blog.blogImage} alt="blogImg" />
       </div>
 
-      <div className="blogContent">
+      {/* <div className="blogContent">
         <p>{blog.content}</p>
-      </div>
+          </div> */}
+      <div
+        className="blogContent"
+        dangerouslySetInnerHTML={{ __html: blog.content }}
+      ></div>
     </div>
   );
 }

@@ -51,7 +51,7 @@ function Register() {
           <input
             className="inputFieldLogin"
             type="text"
-            placeholder="Your full name"
+            placeholder="Your username"
             {...register("UserName")}
           />
           <p>{errors.UserName?.message}</p>
