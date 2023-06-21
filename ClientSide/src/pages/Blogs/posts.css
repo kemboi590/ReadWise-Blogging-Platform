@@ -1,0 +1,41 @@
+.blogPostPage {
+  min-height: 90vh;
+  height: fit-content;
+}
+.blogInfo {
+  display: flex;
+  align-items: center;
+  margin-left: 40px;
+  gap: 40px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.blogTitle {
+  text-align: center;
+}
+.blogdescription {
+  text-align: center;
+}
+
+.userImg {
+  width: 50px;
+}
+.userImg img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.blogImage {
+  /* width: 20%; */
+  /* place it at the center */
+  display: flex;
+  justify-content: center;
+}
+.blogImage img {
+  width: 80px;
+}
+
+.blogContent {
+  text-align: center;
+}

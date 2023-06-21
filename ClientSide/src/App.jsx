@@ -12,6 +12,7 @@ import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
 import NotFound from "./pages/NotFound/NotFound";
 import TinyMCEEditor from "./pages/Blogs/TinyMCEEditor";
+import BlogPosts from "./pages/Blogs/BlogPosts";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/createblog" element={<TinyMCEEditor />} />
+          <Route  path="/blogposts/:id"  element={<BlogPosts />} />
         </Routes>
 
         <Footer />
