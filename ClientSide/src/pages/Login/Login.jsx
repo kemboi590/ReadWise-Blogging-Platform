@@ -4,16 +4,19 @@ import "./login.css";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import Axios from "axios";
+import { useNavigate } from "react-router-dom"; //import useNavigate
 
 const schema = yup.object().shape({
-  email: yup.string().email("Email is invalid").required("Email is required"),
+  Email: yup.string().email("Email is invalid").required("Email is required"),
   password: yup
     .string()
-    .min(6, "Password must be at least 6 characters")
+    .min(4, "Password must be at least 4 characters")
     .required("Password is required"),
 });
 
 function Login() {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -22,8 +25,15 @@ function Login() {
   } = useForm({ resolver: yupResolver(schema) });
 
   const sendDataToServer = (data) => {
-    console.log(data);
-    reset();
+    Axios.post("http://localhost:8081/auth/login", data)
+      .then(({ data }) => {
+        if (data.token) {
+          navigate("/");
+        }
+      })
+      .catch(({ response }) => {
+        alert(response.data.error);
+      });
   };
 
   return (
@@ -35,7 +45,7 @@ function Login() {
           <input
             type="email"
             placeholder="Your email"
-            {...register("email")}
+            {...register("Email")}
             className="inputFieldLogin"
           />
           <p>{errors.email?.message}</p>

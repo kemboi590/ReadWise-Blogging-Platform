@@ -63,7 +63,7 @@ export const loginUser = async (req, res) => {
       return res.status(401).json({ message: "User does not exist" });
     } else {
       if (!bcrypt.compareSync(password, user.hashedPassword)) {
-        return res.status(401).json("Incorrect password");
+        return res.status(401).json({ error: "Incorrect password" });
       } else {
         //create token
         const token = `JWT ${jwt.sign(
@@ -80,7 +80,7 @@ export const loginUser = async (req, res) => {
       }
     }
   } catch (error) {
-    res.status(409).json(error.message);
+    res.status(409).json({ error: "invalid credentials" });
   } finally {
     sql.close();
   }

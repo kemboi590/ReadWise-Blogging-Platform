@@ -4,13 +4,17 @@ import "./register.css";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import Axios from "axios";
+//import useNavigate
+import { useNavigate } from "react-router-dom"; 
 
 const schema = yup.object().shape({
-  fullname: yup.string().required("Full name is required"),
-  email: yup.string().email("Email is invalid").required("Email is required"),
+  UserName: yup.string().required("Full name is required"),
+  Email: yup.string().email("Email is invalid").required("Email is required"),
+  Role: yup.string().required("Role is required"),
   password: yup
     .string()
-    .min(6, "Password must be at least 6 characters")
+    .min(4, "Password must be at least 4 characters")
     .required("Password is required"),
   confirmPassword: yup
     .string()
@@ -19,6 +23,7 @@ const schema = yup.object().shape({
 });
 
 function Register() {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -26,34 +31,51 @@ function Register() {
     reset,
   } = useForm({ resolver: yupResolver(schema) });
 
-  const sendDataToServer = (data) => {
-    console.log(data);
-    reset();
+  const onSubmit = (data) => {
+    Axios.post("http://localhost:8081/auth/register", data)
+      .then((response) => {
+        response.data.message && alert(response.data.message);
+        navigate("/login");
+      })
+      .catch(({ response }) => {
+        console.log(response);
+        alert(response.data.error);
+      });
   };
-
   return (
     <div className="registrationPage">
       <h2 className="registrationTitle">REGISTER</h2>
 
-      <form onSubmit={handleSubmit(sendDataToServer)} className="myFormLogin">
+      <form onSubmit={handleSubmit(onSubmit)} className="myFormLogin">
         <>
           <input
             className="inputFieldLogin"
             type="text"
             placeholder="Your full name"
-            {...register("fullname")}
+            {...register("UserName")}
           />
-          <p>{errors.fullname?.message}</p>
+          <p>{errors.UserName?.message}</p>
         </>
         <>
           <input
             className="inputFieldLogin"
             type="email"
             placeholder="Your email"
-            {...register("email")}
+            {...register("Email")}
           />
-          <p>{errors.email?.message}</p>
+          <p>{errors.Email?.message}</p>
         </>
+
+        <>
+          <input
+            className="inputFieldLogin"
+            type="text"
+            placeholder="Your Role"
+            {...register("Role")}
+          />
+          <p>{errors.Role?.message}</p>
+        </>
+
         <>
           <input
             className="inputFieldLogin"
