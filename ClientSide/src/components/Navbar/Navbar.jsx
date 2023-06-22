@@ -34,33 +34,33 @@ function Navbar() {
         {/* HOME */}
         <Link to="/">
           <li className="linkitem">
-            <FaHome /> Home{" "}
+            <FaHome className="Ricon"/> Home{" "}
           </li>
         </Link>
         {/* ABOUT */}
         <Link to="/about">
           <li className="linkitem">
-            <BsFillInfoCircleFill /> About
+            <BsFillInfoCircleFill className="Ricon"/> About
           </li>
         </Link>
         {user && (
           <Link to="/blogs">
             <li className="linkitem">
-              <FaBlogger /> Blogs{" "}
+              <FaBlogger className="Ricon"/> Blogs{" "}
             </li>
           </Link>
         )}
         {/* CONTACTS */}
         <Link to="/contacts">
           <li className="linkitem">
-            <MdPermContactCalendar /> Contacts{" "}
+            <MdPermContactCalendar className="Ricon"/> Contacts{" "}
           </li>
         </Link>
         {/* REGISTER */}
         {!user ? (
           <Link to="/register">
             <li className="linkitem">
-              <BiRegistered /> Register
+              <BiRegistered className="Ricon"/> Register
             </li>
           </Link>
         ) : null}
@@ -68,7 +68,7 @@ function Navbar() {
         {!user ? (
           <Link to="/login">
             <li className="linkitem">
-              <BiLogInCircle /> Login{" "}
+              <BiLogInCircle className="Ricon"/> Login{" "}
             </li>
           </Link>
         ) : null}
@@ -76,7 +76,7 @@ function Navbar() {
         {user && (
           <Link to="/profile">
             <li className="linkitem">
-              <CgProfile /> Profile{" "}
+              <CgProfile className="Ricon"/> Profile{" "}
             </li>
           </Link>
         )}

@@ -25,8 +25,10 @@ function TinyMCEEditor() {
   };
 
   return (
-      <div className="EditorContainer">
-          <h2 className="titleToWriteBlog">Educate through Writing, Unleash the Power of Your Words</h2>
+    <div className="EditorContainer">
+      <h2 className="titleToWriteBlog">
+        Educate through Writing, Unleash the Power of Your Words
+      </h2>
       <div className="bothTitleDescr">
         <div className="form-field">
           <label htmlFor="blogTitle">Give a Title for your Blog:</label>
@@ -69,7 +71,9 @@ function TinyMCEEditor() {
         }}
         onEditorChange={handleEditorChange}
       />
-      <button onClick={handleSubmit} className="publish">Publish</button>
+      <button onClick={handleSubmit} className="publish">
+        Publish
+      </button>
     </div>
   );
 }
