@@ -1,81 +1,53 @@
-import React, { useState } from "react";
-import "./TinyMCEEditor.css";
+import React, { useState, useRef } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 
-function TinyMCEEditor() {
-  const [blogTitle, setBlogTitle] = useState("");
-  const [blogDescription, setBlogDescription] = useState("");
+function MyComponent() {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const editorRef = useRef(null);
 
-  const handleEditorChange = (content, editor) => {
-    console.log("Content was updated:", content);
+  const handleEditorChange = (content) => {
+    // Handle editor content change
   };
 
-  const handleTitleChange = (e) => {
-    setBlogTitle(e.target.value);
+  const handleClick = () => {
+    const editorContent = editorRef.current.editor.getContent({ format: 'text' });
+  
+    // Log the values
+    console.log("Title:", title);
+    console.log("Description:", description);
+    console.log("Editor Content:", editorContent.trim());
   };
-
-  const handleDescriptionChange = (e) => {
-    setBlogDescription(e.target.value);
-  };
-
-  const handleSubmit = () => {
-    console.log("Submit clicked");
-    console.log("Title:", blogTitle);
-    console.log("Description:", blogDescription);
-  };
+  
+  
 
   return (
-    <div className="EditorContainer">
-      <h2 className="titleToWriteBlog">
-        Educate through Writing, Unleash the Power of Your Words
-      </h2>
-      <div className="bothTitleDescr">
-        <div className="form-field">
-          <label htmlFor="blogTitle">Give a Title for your Blog:</label>
-          <input
-            type="text"
-            id="blogTitle"
-            value={blogTitle}
-            onChange={handleTitleChange}
-            className="titleBlog"
-          />
-        </div>
-        <div className="form-field">
-          <label htmlFor="blogDescription">
-            Give a short Description about your Blog:
-          </label>
-          <input
-            id="blogDescription"
-            value={blogDescription}
-            onChange={handleDescriptionChange}
-            className="textDesc"
-          />
-        </div>
-      </div>
+    <div>
+      <label htmlFor="title">Title:</label>
+      <input
+        type="text"
+        id="title"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      />
+
+      <label htmlFor="description">Description:</label>
+      <input
+        type="text"
+        id="description"
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+      />
 
       <Editor
         apiKey="6ysspo305d6uqauwzwnfy7ormdyq073g8jpw0gohu2a3m2gp"
-        initialValue="<p></p>"
-        init={{
-          height: 500,
-          menubar: false,
-          plugins: [
-            "advlist autolink lists link image charmap print preview anchor",
-            "searchreplace visualblocks code fullscreen",
-            "insertdatetime media table paste code help wordcount",
-          ],
-          toolbar:
-            "undo redo | formatselect | bold italic backcolor | \
-              alignleft aligncenter alignright alignjustify | \
-              bullist numlist outdent indent | removeformat | help",
-        }}
         onEditorChange={handleEditorChange}
+        ref={editorRef}
       />
-      <button onClick={handleSubmit} className="publish">
-        Publish
-      </button>
+
+      <button onClick={handleClick}>Submit</button>
     </div>
   );
 }
 
-export default TinyMCEEditor;
+export default MyComponent;
