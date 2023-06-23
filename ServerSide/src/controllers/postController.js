@@ -17,7 +17,8 @@ export const getBlogs = async (req, res) => {
 //CREATE BLOG
 export const createBlog = async (req, res) => {
   try {
-    const { UserID, Title, BlogDesc, Content, Category, CreatedAt, UpdatedAt } =
+    const { UserID } = req.user;
+    const { Title, BlogDesc, Content, Category, CreatedAt, UpdatedAt } =
       req.body;
     let pool = await sql.connect(config.sql);
     await pool

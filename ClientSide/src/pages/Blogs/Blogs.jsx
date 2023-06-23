@@ -55,6 +55,12 @@ function Blogs() {
                     <div className="blogContent">
                       <p className="description">{blog.BlogDesc}</p>
                     </div>
+                    <div className="blogContent">
+                      <p
+                        className="description"
+                        dangerouslySetInnerHTML={{ __html: blog.Content }}
+                      ></p>
+                    </div>
                   </div>
                   <div className="blogImg">
                     <img src={blogImg} alt="blogImg" />

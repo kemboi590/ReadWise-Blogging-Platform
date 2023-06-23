@@ -19,6 +19,7 @@
 }
 input {
   display: block;
+  background-color: rgba(255, 255, 255, 0.753);
 }
 
 #title {
@@ -38,16 +39,36 @@ input {
   outline: none;
   margin: 0 auto;
 }
+
 .myEditor {
   width: 90%;
   margin: 0 auto;
   padding-top: 20px;
   padding-bottom: 20px;
+  height: 500px;
 }
+
+.myEditor .ql-toolbar {
+  background-color: white;
+  color: black;
+  border: none;
+  border: 1px solid rgba(0, 0, 0, 0.631);
+  border-radius: 2px;
+}
+
+.myEditor .ql-editor {
+  background-color: rgba(255, 255, 255, 0.753);
+  color: black;
+  min-height: 400px;
+}
+
+.myEditor .ql-container {
+  border: none;
+}
+
 .sbtBtb {
   width: 50%;
   text-align: center;
-  /* margin-top: 10px; */
   margin: 0 auto;
   height: 40px;
   display: flex;
