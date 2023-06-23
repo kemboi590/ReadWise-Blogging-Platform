@@ -56,7 +56,9 @@ export const loginUser = async (req, res) => {
     let pool = await sql.connect(config.sql);
     let result = await pool
       .request()
+      
       .input("Email", sql.VarChar, Email)
+      
       .query("SELECT * FROM Users WHERE Email = @Email");
     const user = result.recordset[0];
     if (!user) {
@@ -67,14 +69,17 @@ export const loginUser = async (req, res) => {
       } else {
         //create token
         const token = `JWT ${jwt.sign(
-          { Email: user.Email },
+          {
+            Email: user.Email,
+            UserID: user.UserID,
+            UserName: user.UserName,
+          },
           config.jwt_secret,
           { expiresIn: "1h" }
         )}`;
         res.status(200).json({
-          UserName: user.UserName,
           Email: user.Email,
-          UserCredntialsID: user.UserCredntialsID,
+          UserID: user.UserID,
           token: token,
         });
       }

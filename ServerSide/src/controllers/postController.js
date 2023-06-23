@@ -5,7 +5,7 @@ import config from "../db/config.js";
 export const getBlogs = async (req, res) => {
   try {
     let pool = await sql.connect(config.sql);
-    const result = await pool.request().query("SELECT * FROM BlogPost");
+    const result = await pool.request().query("EXEC GetBlogPostsAndUsers");
     res.json(result.recordset);
   } catch (error) {
     res.status(201).json(error.message);

@@ -41,7 +41,7 @@ function Blogs() {
                     <img src={userImg} alt="userImg" />
                   </div>
                   <div className="userName">
-                    <p className="author">{blog.BlogDesc}</p>
+                    <p className="author">{blog.UserName}</p>
                   </div>
                   <div className="timePosted">
                     <p className="time">{blog.UpdatedAt}</p>
