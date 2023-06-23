@@ -3,8 +3,11 @@ import { Editor } from "@tinymce/tinymce-react";
 import Axios from "axios";
 import "./TinyMCEEditor.css";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { Context } from "../../context/userContext/Context";
 
 function MyComponent() {
+  const { user } = useContext(Context);
   const navigate = useNavigate();
   const [Title, setTitle] = useState("");
   const [BlogDesc, setDescription] = useState("");
@@ -47,6 +50,9 @@ function MyComponent() {
 
   return (
     <div className="createMyBlog">
+      {/* check if user is logged in */}
+      {!user ? navigate("/login") : null}
+
       <label htmlFor="Title" className="name">
         Give a Title to your Blog
       </label>

@@ -18,7 +18,7 @@ const schema = yup.object().shape({
 });
 
 function Login() {
-  const {user, dispatch} = useContext(Context);
+  const { user, dispatch } = useContext(Context);
   const navigate = useNavigate();
   const {
     register,
@@ -31,9 +31,10 @@ function Login() {
     Axios.post("http://localhost:8081/auth/login", data)
       .then(({ data }) => {
         if (data.token) {
+          alert("You are logged in!");
           navigate("/");
-          console.log(user)
-          dispatch({type: "LOGIN_SUCCESS", payload: data});
+          console.log(user);
+          dispatch({ type: "LOGIN_SUCCESS", payload: data });
         }
       })
       .catch(({ response }) => {

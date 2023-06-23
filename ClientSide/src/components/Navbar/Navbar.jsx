@@ -34,7 +34,7 @@ function Navbar() {
         {/* HOME */}
         <Link to="/">
           <li className="linkitem">
-            <FaHome className="Ricon"/> Home{" "}
+            <FaHome className="Ricon"/> Home
           </li>
         </Link>
         {/* ABOUT */}
