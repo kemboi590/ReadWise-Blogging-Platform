@@ -8,6 +8,7 @@ hashedPassword VARCHAR(255),
 Role VARCHAR (100),
 )
 
+
 --create table BlogPost
 
 CREATE TABLE BlogPost(
@@ -46,6 +47,9 @@ VALUES
     ('JaneSmith', 'janesmith@example.com', 'hashed456', 'Admin'),
     ('BobJohnson', 'bobjohnson@example.com', 'hashed789', 'User');
 
+	INSERT INTO Users (UserName, Email, hashedPassword, Role)
+VALUES  ('kibish', 'kibish@example.com', '1234', 'User')
+
 	--inserting into comments table
 INSERT INTO BlogPost (UserID, Title, BlogDesc, Content, Category, CreatedAt, UpdatedAt)
 VALUES
@@ -59,6 +63,8 @@ VALUES
     (1, 2, 'Great post!', GETDATE()),
     (1, 3, 'I enjoyed reading this', GETDATE()),
     (2, 1, 'Looking forward to more posts', GETDATE());
+
+	SELECT * FROM Comments WHERE PostID = 1
 
 
 	--inserting into Likes table
@@ -121,6 +127,26 @@ SELECT * FROM Likes WHERE PostID = 1;
 
 --Retrieve likes by a specific user:
 SELECT * FROM Likes WHERE UserID = 1;
+
+
+--Update blog post
+UPDATE BlogPost
+SET BlogDesc = 'New description'
+WHERE BlogPostID = 1; -- Replace 1 with the ID of the blog post you want to update
+
+
+
+
+CREATE PROCEDURE GetBlogPostsAndUsers
+AS
+BEGIN
+    SELECT BlogPost.*, Users.UserID, Users.UserName, Users.Email, Users.Role
+    FROM BlogPost
+    JOIN Users ON BlogPost.UserID = Users.UserID;
+END
+
+EXEC GetBlogPostsAndUsers;
+
 
 
 
