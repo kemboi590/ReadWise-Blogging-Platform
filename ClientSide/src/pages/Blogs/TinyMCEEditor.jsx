@@ -7,7 +7,7 @@ import { Context } from "../../context/userContext/Context";
 import Axios from "axios";
 import { apidomain } from "../../utils/domain";
 // import the css filr TinyMCEEditor.css
-
+import "./TinyMCEEditor.css";
 
 const modules = {
   toolbar: [
