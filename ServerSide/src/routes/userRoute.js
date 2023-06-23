@@ -1,7 +1,6 @@
 import {
   registerUser,
   loginUser,
-  loginRequired,
 } from "../controllers/userController.js";
 
 const user = (app) => {
