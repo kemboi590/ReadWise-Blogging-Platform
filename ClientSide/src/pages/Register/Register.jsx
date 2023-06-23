@@ -6,7 +6,8 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Axios from "axios";
 //import useNavigate
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
+import { apidomain } from "../../utils/domain";
 
 const schema = yup.object().shape({
   UserName: yup.string().required("Full name is required"),
@@ -32,7 +33,7 @@ function Register() {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmit = (data) => {
-    Axios.post("http://localhost:8081/auth/register", data)
+    Axios.post(`${apidomain}/auth/register`, data)
       .then((response) => {
         response.data.message && alert(response.data.message);
         navigate("/login");

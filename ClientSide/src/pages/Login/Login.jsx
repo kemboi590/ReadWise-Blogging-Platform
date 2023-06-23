@@ -8,6 +8,7 @@ import Axios from "axios";
 import { useNavigate } from "react-router-dom"; //import useNavigate
 import { useContext } from "react";
 import { Context } from "../../context/userContext/Context";
+import { apidomain } from "../../utils/domain";
 
 const schema = yup.object().shape({
   Email: yup.string().email("Email is invalid").required("Email is required"),
@@ -28,7 +29,7 @@ function Login() {
   } = useForm({ resolver: yupResolver(schema) });
 
   const sendDataToServer = (data) => {
-    Axios.post("http://localhost:8081/auth/login", data)
+    Axios.post(`${apidomain}/auth/login`, data)
       .then(({ data }) => {
         if (data.token) {
           alert("You are logged in!");

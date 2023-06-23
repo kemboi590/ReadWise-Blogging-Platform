@@ -5,6 +5,7 @@ import "./TinyMCEEditor.css";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { Context } from "../../context/userContext/Context";
+import { apidomain } from "../../utils/domain";
 
 function MyComponent() {
   const { user } = useContext(Context);
@@ -35,7 +36,12 @@ function MyComponent() {
 
     console.log(mydata);
 
-    Axios.post("http://localhost:8081/blogs", mydata)
+    Axios.post(`${apidomain}/blogs`, mydata, {
+      headers: {
+        Authorization: `${user.token}`,
+      },
+    })
+
       .then((response) => {
         console.log(response);
         alert(response.data);
