@@ -35,6 +35,8 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
   background-color: #e7ece7;
   margin: 25px;
+  color: black;
+  
 }
 .introBlogs {
   display: flex;
@@ -42,6 +44,7 @@
   width: 100%;
   align-items: center;
   gap: 20px;
+
 }
 
 .userImg {
@@ -96,5 +99,4 @@
   .description {
     margin-top: 10px;
   }
-
 }

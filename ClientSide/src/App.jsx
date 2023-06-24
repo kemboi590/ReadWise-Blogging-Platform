@@ -15,6 +15,7 @@ import NotFound from "./pages/NotFound/NotFound";
 import QuillEditor from "./pages/Blogs/QuillEditor";
 import Profile from "./pages/profile/Profile";
 import Logout from "./pages/Logout/Logout";
+import SinglePost from "./pages/Blogs/SinglePost";
 
 // import context
 import { useContext } from "react";
@@ -36,10 +37,11 @@ function App() {
           <Route path="/contacts" element={<Contacts />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          <Route path="*" element={<NotFound />} />
           <Route path="/createblog" element={<QuillEditor />} />
           <Route path="/profile" element={user ? <Profile /> : <Login />} />
           <Route path="/logout" element={<Logout />} />
+          <Route path="/blog/:id" element={<SinglePost />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
 
         <Footer />

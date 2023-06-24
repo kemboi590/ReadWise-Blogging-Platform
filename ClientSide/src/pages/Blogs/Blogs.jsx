@@ -2,7 +2,6 @@ import React from "react";
 import "./blogs.css";
 import { Link } from "react-router-dom";
 import userImg from "../../images/user.png";
-import blogImg from "../../images/blogImage.jpeg";
 
 import { useState, useEffect, useContext } from "react";
 import { Context } from "./../../context/userContext/Context";
@@ -31,40 +30,36 @@ function Blogs() {
       <Link to="/createblog">
         <h4 className="create">Create a Blog</h4>
       </Link>
+
       <div className="allBlogs">
         {blogs &&
           blogs.map((blog, index) => {
             return (
-              <div className="singleBlog" key={index}>
-                <div className="introBlogs">
-                  <div className="userImg">
-                    <img src={userImg} alt="userImg" />
+              <Link to={`/blog/${blog.PostID}`} key={index}>
+                <div className="singleBlog" key={index}>
+                  <div className="introBlogs">
+                    <div className="userImg">
+                      <img src={userImg} alt="userImg" />
+                    </div>
+                    <div className="userName">
+                      <p className="author">{blog.UserName}</p>
+                    </div>
+                    <div className="timePosted">
+                      <p className="time">{blog.UpdatedAt}</p>
+                    </div>
                   </div>
-                  <div className="userName">
-                    <p className="author">{blog.UserName}</p>
-                  </div>
-                  <div className="timePosted">
-                    <p className="time">{blog.UpdatedAt}</p>
+                  <div className="mainBlog">
+                    <div className="containTitleContent">
+                      <div className="blogTitle">
+                        <h3 className="title">{blog.Title}</h3>
+                      </div>
+                      <div className="blogContent">
+                        <p className="description">{blog.BlogDesc}</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <div className="mainBlog">
-                  <div className="containTitleContent">
-                    <div className="blogTitle">
-                      <h3 className="title">{blog.Title}</h3>
-                    </div>
-                    <div className="blogContent">
-                      <p className="description">{blog.BlogDesc}</p>
-                    </div>
-                    <div className="blogContent">
-                      <p
-                        className="description"
-                        dangerouslySetInnerHTML={{ __html: blog.Content }}
-                      ></p>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
+              </Link>
             );
           })}
       </div>
