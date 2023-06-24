@@ -45,7 +45,7 @@ input {
   margin: 0 auto;
   padding-top: 20px;
   padding-bottom: 20px;
-  height: 500px;
+  min-height: 500px;
 }
 
 .myEditor .ql-toolbar {
@@ -80,19 +80,3 @@ input {
   background-color: #a1b6a1;
   color: white;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

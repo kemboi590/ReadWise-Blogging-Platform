@@ -55,6 +55,8 @@
 
 .mainBlog {
   display: flex;
+  justify-content: center;
+  text-align: justify;
   padding: 15px;
   margin: 6px 0;
 }
@@ -79,13 +81,11 @@
     margin-top: 0.5rem;
   }
   .create {
-
     font-size: 15px;
     padding: 10px;
     border-radius: 10px;
 
     width: 150px;
-
   }
   .mainBlog {
     flex-direction: column;
@@ -96,12 +96,5 @@
   .description {
     margin-top: 10px;
   }
-  .blogImg {
-    width: 100%;
-  }
-  .blogImg img {
-    margin-top: 10px;
-    width: 100px;
-    border-radius: 7px;
-  }
+
 }

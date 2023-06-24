@@ -2,7 +2,6 @@ import React from "react";
 import "./blogs.css";
 import { Link } from "react-router-dom";
 import userImg from "../../images/user.png";
-import blogImg from "../../images/blogImage.jpeg";
 
 import { useState, useEffect, useContext } from "react";
 import { Context } from "./../../context/userContext/Context";
@@ -55,15 +54,13 @@ function Blogs() {
                     <div className="blogContent">
                       <p className="description">{blog.BlogDesc}</p>
                     </div>
+                    
                     <div className="blogContent">
                       <p
                         className="description"
                         dangerouslySetInnerHTML={{ __html: blog.Content }}
                       ></p>
                     </div>
-                  </div>
-                  <div className="blogImg">
-                    <img src={blogImg} alt="blogImg" />
                   </div>
                 </div>
               </div>

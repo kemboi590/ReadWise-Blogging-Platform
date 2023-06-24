@@ -1,6 +1,6 @@
 import React from "react";
 import userImg from "../../images/user.png";
-import blogImg from "../../images/blogImage.jpeg";
+
 import "./posts.css";
 
 function BlogPosts() {
