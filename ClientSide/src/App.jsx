@@ -13,7 +13,6 @@ import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
 import NotFound from "./pages/NotFound/NotFound";
 import QuillEditor from "./pages/Blogs/QuillEditor";
-import BlogPosts from "./pages/Blogs/BlogPosts";
 import Profile from "./pages/profile/Profile";
 import Logout from "./pages/Logout/Logout";
 
@@ -39,7 +38,6 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/createblog" element={<QuillEditor />} />
-          <Route path="/blogposts/:id" element={<BlogPosts />} />
           <Route path="/profile" element={user ? <Profile /> : <Login />} />
           <Route path="/logout" element={<Logout />} />
         </Routes>
