@@ -13,7 +13,7 @@ function Blogs() {
   const [blogs, setBlogs] = useState([]);
 
   const fetchBlogs = async () => {
-    const res = await Axios.get(`${apidomain}/blogs`, { //http://localhost/blogs
+    const res = await Axios.get(`${apidomain}/blogs`, { 
       headers: {
         Authorization: `${user.token}`,
       },

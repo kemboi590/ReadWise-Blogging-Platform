@@ -5,7 +5,7 @@ import config from "../db/config.js";
 export const getBlogs = async (req, res) => {
   try {
     let pool = await sql.connect(config.sql);
-    const result = await pool.request().query("EXEC GetBlogPostsAndUsers");
+    const result = await pool.request().query("EXEC GetAllBlogPostDetails");
     res.json(result.recordset);
   } catch (error) {
     res.status(201).json(error.message);
@@ -49,7 +49,7 @@ export const getSingleBlog = async (req, res) => {
     const result = await pool
       .request()
       .input("id", sql.VarChar, id)
-      .query("SELECT * FROM BlogPost WHERE PostID = @id");
+      .query("EXEC GetBlogPostDetails @PostID = @id");
     res.status(200).json(result.recordset[0]);
   } catch (error) {
     res.status(201).json(error.message);

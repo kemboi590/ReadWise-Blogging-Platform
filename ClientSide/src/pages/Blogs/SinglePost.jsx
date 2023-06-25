@@ -22,7 +22,9 @@ function SinglePost() {
         },
       });
       setBlog(res.data);
-      setLikes(res.data.likes); //revisit
+      console.log(res);
+      setLikes(res.data.Likes); //revisit
+      // console.log(res.data.Likes);
     } catch (error) {
       console.log(error);
     }
@@ -30,14 +32,15 @@ function SinglePost() {
   //revisit
   const handleLike = async () => {
     try {
-      await Axios.post(`${apidomain}/blogs/${id}/like`, null, {
+      await Axios.put(`${apidomain}/likes/${id}`, null, {
         headers: {
           Authorization: `${user.token}`,
         },
       });
       setLikes(likes + 1);
+      console.log(likes + 1);
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   };
 
@@ -64,7 +67,7 @@ function SinglePost() {
         </div>
         <div className="LikeComment">
           <h3 className="like" onClick={handleLike}>
-            <FaThumbsUp />
+            <FaThumbsUp /> {likes}
           </h3>
           <h3 className="comment">
             {" "}

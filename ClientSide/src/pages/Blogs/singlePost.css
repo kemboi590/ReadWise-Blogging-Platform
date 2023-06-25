@@ -6,6 +6,8 @@
   border-radius: 4px;
   /* box shadow */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.58);
+  /* line spacing */
+  line-height: 1.5;
 
   padding: 2rem;
 }

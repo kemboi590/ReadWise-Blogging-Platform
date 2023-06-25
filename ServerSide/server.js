@@ -9,6 +9,7 @@ import blogs from "./src/routes/postRoute.js";
 import user from "./src/routes/userRoute.js";
 import bodyParser from "body-parser";
 import comments from "./src/routes/CommentsRoute.js";
+import likes from "./src/routes/LikesRoute.js";
 
 //invoke express
 const app = express();
@@ -44,6 +45,7 @@ app.use((req, res, next) => {
 //allow routes access express
 blogs(app);
 user(app);
+likes(app);
 comments(app);
 
 //port
