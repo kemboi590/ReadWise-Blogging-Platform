@@ -37,85 +37,83 @@ const formats = [
   "image",
 ];
 function QuillEditor() {
-  
-const { user } = useContext(Context);
-const navigate = useNavigate();
-const [Title, setTitle] = useState("");
-const [BlogDesc, setDescription] = useState("");
-const [Content, setContent] = useState("");
+  const { user } = useContext(Context);
+  const navigate = useNavigate();
+  const [Title, setTitle] = useState("");
+  const [BlogDesc, setDescription] = useState("");
+  const [Content, setContent] = useState("");
 
-const handleEditorChange = (content) => {
-  setContent(content);
-};
-
-const handleClick = () => {
-  if (!Title || !BlogDesc || !Content.trim()) {
-    alert("Please enter all required fields");
-    return;
-  }
-
-  const mydata = {
-    Title,
-    BlogDesc,
-    Content: Content.trim(),
+  const handleEditorChange = (content) => {
+    setContent(content);
   };
 
-  Axios.post(`${apidomain}/blogs`, mydata, {
-    headers: {
-      Authorization: `${user.token}`,
-    },
-  })
-    .then((response) => {
-      console.log(response);
-      alert(response.data);
-      navigate("/blogs");
+  const handleClick = () => {
+    if (!Title || !BlogDesc || !Content.trim()) {
+      alert("Please enter all required fields");
+      return;
+    }
+
+    const mydata = {
+      Title,
+      BlogDesc,
+      Content: Content.trim(),
+    };
+
+    Axios.post(`${apidomain}/blogs`, mydata, {
+      headers: {
+        Authorization: `${user.token}`,
+      },
     })
-    .catch((error) => {
-      console.log(error);
-      alert("Please try again later");
-    });
-};
+      .then((response) => {
+        console.log(response);
+        alert(response.data);
+        navigate("/blogs");
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("Please try again later");
+      });
+  };
 
-return (
-  <div className="createMyBlog">
-    {!user ? navigate("/login") : null}
+  return (
+    <div className="createMyBlog">
+      {!user ? navigate("/login") : null}
 
-    <label htmlFor="Title" className="name">
-      Give a Title to your Blog
-    </label>
-    <input
-      type="text"
-      id="title"
-      value={Title}
-      onChange={(e) => setTitle(e.target.value)}
-    />
-
-    <label htmlFor="BlogDesc" className="name">
-      Give a Description to your Blog
-    </label>
-    <input
-      type="text"
-      id="description"
-      value={BlogDesc}
-      onChange={(e) => setDescription(e.target.value)}
-    />
-
-    <div className="myEditor">
-      <ReactQuill
-        theme="snow"
-        modules={modules}
-        formats={formats}
-        value={Content}
-        onChange={handleEditorChange}
+      <label htmlFor="Title" className="name">
+        Give a Title to your Blog
+      </label>
+      <input
+        type="text"
+        id="title"
+        value={Title}
+        onChange={(e) => setTitle(e.target.value)}
       />
-    </div>
 
-    <button onClick={handleClick} className="sbtBtb">
-      Submit
-    </button>
-  </div>
-);
+      <label htmlFor="BlogDesc" className="name">
+        Give a Description to your Blog
+      </label>
+      <input
+        type="text"
+        id="description"
+        value={BlogDesc}
+        onChange={(e) => setDescription(e.target.value)}
+      />
+
+      <div className="myEditor">
+        <ReactQuill
+          theme="snow"
+          modules={modules}
+          formats={formats}
+          value={Content}
+          onChange={handleEditorChange}
+        />
+      </div>
+
+      <button onClick={handleClick} className="sbtBtb">
+        Submit
+      </button>
+    </div>
+  );
 }
 
-
-export default QuillEditor
+export default QuillEditor;
