@@ -9,7 +9,7 @@ export const getComments = async (req, res) => {
     const result = await pool
       .request()
       .input("id", sql.VarChar, id)
-      .query("SELECT * FROM Comments WHERE PostID = @id");
+      .query("EXEC GetCommentDetails @PostID = @id");
     res.status(200).json(result.recordset);
   } catch (error) {
     res.status(201).json(error.message);

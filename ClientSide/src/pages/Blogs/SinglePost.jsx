@@ -5,6 +5,7 @@ import { apidomain } from "./../../utils/domain";
 import { Context } from "./../../context/userContext/Context";
 import { FaThumbsUp } from "react-icons/fa";
 import { FaComment } from "react-icons/fa";
+import Comments from "./Comments";
 // import css
 import "./SinglePost.css";
 
@@ -13,6 +14,7 @@ function SinglePost() {
   const { id } = useParams();
   const [blog, setBlog] = useState(null);
   const [likes, setLikes] = useState(blog?.likes || 0);
+  const [liked, setLiked] = useState(false);
 
   const fetchSingleBlog = async () => {
     try {
@@ -22,7 +24,8 @@ function SinglePost() {
         },
       });
       setBlog(res.data);
-      console.log(res);
+      // console.log(res.data);
+      // console.log(res);
       setLikes(res.data.Likes); //revisit
       // console.log(res.data.Likes);
     } catch (error) {
@@ -32,13 +35,25 @@ function SinglePost() {
   //revisit
   const handleLike = async () => {
     try {
-      await Axios.put(`${apidomain}/likes/${id}`, null, {
-        headers: {
-          Authorization: `${user.token}`,
-        },
-      });
-      setLikes(likes + 1);
-      console.log(likes + 1);
+      if (liked) {
+        // Remove the like
+        await Axios.delete(`${apidomain}/likes/${id}`, {
+          headers: {
+            Authorization: `${user.token}`,
+          },
+        });
+        setLikes(likes - 1);
+        setLiked(false);
+      } else {
+        await Axios.put(`${apidomain}/likes/${id}`, null, {
+          headers: {
+            Authorization: `${user.token}`,
+          },
+        });
+        setLikes(likes + 1);
+        setLiked(true);
+        console.log(likes + 1);
+      }
     } catch (error) {
       console.log(error.message);
     }
@@ -70,9 +85,11 @@ function SinglePost() {
             <FaThumbsUp /> {likes}
           </h3>
           <h3 className="comment">
-            {" "}
-            <FaComment />{" "}
+            <FaComment />
           </h3>
+        </div>
+        <div className="forComments">
+          <Comments />
         </div>
       </div>
     </div>

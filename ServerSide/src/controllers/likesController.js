@@ -31,3 +31,22 @@ export const createLike = async (req, res) => {
     sql.close();
   }
 };
+
+export const deleteLike = async (req, res) => { 
+  try {
+    const { id } = req.params;
+    const { UserID } = req.user;
+
+    let pool = await sql.connect(config.sql);
+    await pool
+      .request()
+      .input("id", sql.Int, id)
+      .input("UserID", sql.Int, UserID)
+      .query("DELETE FROM Likes WHERE PostID = @id AND UserID = @UserID");
+    res.status(200).json("Like deleted");
+  } catch (error) {
+    res.status(201).json(error.message);
+  } finally {
+    sql.close();
+  }
+}

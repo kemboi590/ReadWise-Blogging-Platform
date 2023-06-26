@@ -49,3 +49,12 @@
   color: rgba(0, 0, 0, 0.948);
   cursor: pointer;
 }
+
+.forComments {
+  justify-content: center;
+  min-height: 50vh;
+  height: fit-content;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.58);
+  position: relative;
+}

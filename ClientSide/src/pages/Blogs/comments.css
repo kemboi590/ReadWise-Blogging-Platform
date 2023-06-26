@@ -1,0 +1,76 @@
+.commentsPage {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+.myForm {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-between; */
+  position: relative;
+  margin: 30px 10px;
+  bottom: 0;
+  gap: 10px;
+}
+
+.inputComment {
+  width: 100%;
+  height: 60px;
+  border-radius: 20px;
+  border: 1px solid rgba(54, 54, 54, 0.072);
+  padding: 0.5rem 0.5rem;
+  font-size: 16px;
+  font-weight: 300;
+  letter-spacing: 0.6px;
+  line-height: 1.5;
+  resize: none;
+}
+.errorcomment {
+  position: absolute;
+  bottom: 0;
+}
+.sbmtComment {
+  width: 10%;
+  height: 40px;
+  border-radius: 5px;
+  padding: 0 1rem;
+  font-size: 20px;
+  font-weight: 500;
+  background-color: #343a40;
+  color: white;
+  cursor: pointer;
+}
+
+.commentImg {
+  width: 35px;
+}
+.commentImg img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.upperWrapper {
+  display: flex;
+  border-bottom: #343a4082 solid 1px;
+  align-items: center;
+  gap: 2rem;
+  margin: 10px;
+  margin-left: 40px;
+  padding-top: 5px;
+}
+.commentCard {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  width: 60%;
+  border: #343a4082 solid 1px;
+}
+
+.comment {
+  padding: 10px;
+  text-align: center;
+}

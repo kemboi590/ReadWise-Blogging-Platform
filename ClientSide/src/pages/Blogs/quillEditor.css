@@ -67,9 +67,12 @@ input {
 }
 
 .sbtBtb {
-  width: 50%;
+  width: 20%;
+  font-size: 20px;
+  font-weight: 600;
   text-align: center;
   margin: 0 auto;
+  color: rgba(0, 0, 0, 0.847);
   height: 40px;
   display: flex;
   justify-content: center;
