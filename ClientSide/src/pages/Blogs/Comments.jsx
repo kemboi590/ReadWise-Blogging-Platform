@@ -13,7 +13,7 @@ import { Context } from "./../../context/userContext/Context";
 import userImg from "../../images/user.png";
 
 const schema = yup.object().shape({
-  comment: yup.string().required("comment is required"),
+  Coment: yup.string().required("comment is required"),
 });
 
 function Comments() {
@@ -44,7 +44,19 @@ function Comments() {
   };
 
   const onSubmit = (data) => {
-    // console.log(data);
+    Axios.post(`${apidomain}/comments/${id}`, data, {
+      headers: {
+        Authorization: `${user.token}`,
+      },
+    })
+      .then((response) => {
+        console.log(response);
+        fetchCommentsDetails();
+      })
+      .catch((response) => {
+        console.log(response);
+      });
+
     reset();
   };
 
@@ -56,16 +68,15 @@ function Comments() {
     <div className="commentsPage">
       <div className="wrapper">
         {commentsDetails.map((comment, index) => (
-            <div className="commentCard" key={index}>
-                
-                <div className="upperWrapper">
-                <div className="commentImg">
-              <img src={userImg} alt="image" />
+          <div className="commentCard" key={index}>
+            <div className="upperWrapper">
+              <div className="commentImg">
+                <img src={userImg} alt="image" />
+              </div>
+              <p className="userComment"> {comment.UserName} </p>
+              <p className="timeComment"> {comment.CreatedAt} </p>
             </div>
-            <p className="userComment"> {comment.UserName} </p>
-            <p className="timeComment"> {comment.CreatedAt} </p>
-                </div>
-            
+
             <p className="comment"> {comment.Coment} </p>
           </div>
         ))}
@@ -75,7 +86,7 @@ function Comments() {
         <textarea
           className="inputComment"
           placeholder="Write a comment"
-          {...register("comment")}
+          {...register("Coment")}
         />
 
         <p className="errorcomment">{errors.comment?.message}</p>

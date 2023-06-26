@@ -56,9 +56,9 @@ export const loginUser = async (req, res) => {
     let pool = await sql.connect(config.sql);
     let result = await pool
       .request()
-      
+
       .input("Email", sql.VarChar, Email)
-      
+
       .query("SELECT * FROM Users WHERE Email = @Email");
     const user = result.recordset[0];
     if (!user) {
@@ -85,7 +85,7 @@ export const loginUser = async (req, res) => {
       }
     }
   } catch (error) {
-    res.status(409).json({ error: "invalid credentials" });
+    res.status(409).json(error.message);
   } finally {
     sql.close();
   }

@@ -21,16 +21,19 @@ export const getComments = async (req, res) => {
 //CREATE COMMENT
 export const createComment = async (req, res) => {
   try {
-    const { PostID, UserID, Coment, CreatedAt } = req.body;
+    const {id} = req.params;
+    const { UserID } = req.user;
+
+    const { Coment, CreatedAt } = req.body;
     let pool = await sql.connect(config.sql);
     await pool
       .request()
-      .input("PostID", sql.Int, PostID)
+      .input("id", sql.Int, id)
       .input("UserID", sql.Int, UserID)
       .input("Coment", sql.VarChar, Coment)
       .input("CreatedAt", sql.VarChar, CreatedAt)
       .query(
-        "INSERT INTO Comments (PostID, UserID, Coment, CreatedAt) VALUES (@PostID, @UserID, @Coment,GETDATE())"
+        "INSERT INTO Comments (PostID, UserID, Coment, CreatedAt) VALUES (@id, @UserID, @Coment,GETDATE())"
       );
     res.status(200).json("Comment created successfully");
   } catch (error) {
