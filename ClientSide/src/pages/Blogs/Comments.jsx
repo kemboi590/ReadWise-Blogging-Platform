@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import {useRef, useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -16,11 +16,11 @@ const schema = yup.object().shape({
   Coment: yup.string().required("comment is required"),
 });
 
-function Comments() {
+function Comments({ textareaRef, postId }) {
   const { id } = useParams();
   const { user } = useContext(Context);
-
   const [commentsDetails, setCommentsDetails] = useState([]);
+  
 
   const {
     register,
@@ -60,9 +60,13 @@ function Comments() {
     reset();
   };
 
+ 
+
   useEffect(() => {
     fetchCommentsDetails();
   }, [id]);
+
+ 
 
   return (
     <div className="commentsPage">
@@ -87,9 +91,10 @@ function Comments() {
           className="inputComment"
           placeholder="Write a comment"
           {...register("Coment")}
+          ref={textareaRef}
         />
 
-        <p className="errorcomment">{errors.comment?.message}</p>
+        <p className="errorcomment">{errors.Coment?.message}</p>
         <button type="submit" className="sbmtComment">
           {<IoSend />}
         </button>

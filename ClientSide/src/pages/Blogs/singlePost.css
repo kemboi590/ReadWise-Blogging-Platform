@@ -58,3 +58,9 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.58);
   position: relative;
 }
+.textLike {
+  font-size: 17px;
+}
+.textComment {
+  font-size: 17px;
+}
