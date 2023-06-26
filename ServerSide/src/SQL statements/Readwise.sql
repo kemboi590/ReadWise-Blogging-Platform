@@ -21,6 +21,13 @@ CREATE TABLE BlogPost(
     CreatedAt DATE,
     UpdatedAt DATE
 )
+-- Change the data type of CreatedAt column to DATETIME
+ALTER TABLE BlogPost
+ALTER COLUMN CreatedAt DATETIME;
+
+-- Change the data type of UpdatedAt column to DATETIME
+ALTER TABLE BlogPost
+ALTER COLUMN UpdatedAt DATETIME;
 
 --create table Comments
 
@@ -65,7 +72,8 @@ VALUES
     (2, 1, 'Looking forward to more posts', GETDATE());
 
 	SELECT * FROM Comments WHERE PostID = 1
-
+INSERT INTO Comments (PostID, UserID, Coment, CreatedAt)
+VALUES  (1040, 1025, 'kararan', GETDATE())
 
 	--inserting into Likes table
 INSERT INTO Likes (PostID, UserID)
@@ -73,6 +81,8 @@ VALUES
     (1, 2),
     (2, 3),
     (3, 1);
+
+	INSERT INTO Likes (PostID, UserID) VALUES ( 1041, 20)
 
 										--QUERIES
 										--Users Table:
@@ -105,14 +115,14 @@ SELECT * FROM BlogPost WHERE Category = 'Tutorials';
 --Delete a blogPost
 DELETE FROM BlogPost WHERE PostID = 3
 
-
+DELETE  BlogPost 
 										--Comments Table:
 --Retrieve all comments:
 SELECT * FROM Comments;
 
 
 --Retrieve comments for a specific blog post:
-SELECT * FROM Comments WHERE PostID = 1;
+SELECT * FROM Comments WHERE PostID = 1040;
 
 --Retrieve comments by a specific user:
 SELECT * FROM Comments WHERE UserID = 1;
@@ -121,6 +131,7 @@ SELECT * FROM Comments WHERE UserID = 1;
 
 -- Retrieve all likes:
 SELECT * FROM Likes;
+DELETE FROM Likes WHERE PostID = 1041 AND UserID = 20
 
 --Retrieve likes for a specific blog post:
 SELECT * FROM Likes WHERE PostID = 1;
@@ -137,16 +148,66 @@ WHERE BlogPostID = 1; -- Replace 1 with the ID of the blog post you want to upda
 
 
 
-CREATE PROCEDURE GetBlogPostsAndUsers
+--CREATE PROCEDURE GetBlogPostsAndUsers
+--AS
+--BEGIN
+--    SELECT BlogPost.*, Users.UserID, Users.UserName, Users.Email, Users.Role
+--    FROM BlogPost
+--    JOIN Users ON BlogPost.UserID = Users.UserID;
+--END
+
+--EXEC GetBlogPostsAndUsers;
+
+
+
+
+
+
+
+
+--CREATE PROCEDURE GetBlogPostDetails
+--    @PostID INT
+--AS
+--BEGIN
+--    SELECT bp.BlogDesc, bp.Content, bp.CreatedAt, bp.UpdatedAt, u.Email, u.Role, bp.PostID, bp.Title, u.UserName,
+--           (SELECT COUNT(*) FROM Likes WHERE PostID = bp.PostID) AS Likes,
+--           (SELECT COUNT(*) FROM Comments WHERE PostID = bp.PostID) AS Comments
+--    FROM BlogPost bp
+--    INNER JOIN Users u ON bp.UserID = u.UserID
+--    WHERE bp.PostID = @PostID;
+--END
+
+
+--EXEC GetBlogPostDetails @PostID = 1040;
+
+-- To get more details of a blog
+CREATE PROCEDURE GetAllBlogPostDetails
 AS
 BEGIN
-    SELECT BlogPost.*, Users.UserID, Users.UserName, Users.Email, Users.Role
-    FROM BlogPost
-    JOIN Users ON BlogPost.UserID = Users.UserID;
+    SELECT bp.BlogDesc, bp.Content, bp.CreatedAt, bp.UpdatedAt, u.Email, u.Role, bp.PostID, bp.Title, u.UserName,
+           (SELECT COUNT(*) FROM Likes WHERE PostID = bp.PostID) AS Likes,
+           (SELECT COUNT(*) FROM Comments WHERE PostID = bp.PostID) AS Comments
+    FROM BlogPost bp
+    INNER JOIN Users u ON bp.UserID = u.UserID;
 END
 
-EXEC GetBlogPostsAndUsers;
+
+EXEC GetAllBlogPostDetails;
 
 
+--COMMENTS DETAILS
+
+CREATE PROCEDURE GetCommentDetails
+    @PostID INT
+AS
+BEGIN
+    SELECT bp.PostID, bp.CreatedAt, c.Coment, u.UserID, u.UserName
+    FROM BlogPost bp
+    INNER JOIN Comments c ON bp.PostID = c.PostID
+    INNER JOIN Users u ON c.UserID = u.UserID
+    WHERE bp.PostID = @PostID;
+END
+
+EXEC GetCommentDetails @PostID = 1040;
 
 
