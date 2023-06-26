@@ -48,6 +48,11 @@ user(app);
 likes(app);
 comments(app);
 
+//
+app.get("/", (req, res) => {
+  res.send("Welcome to ReadWise Blogging API");
+});
+
 //port
 app.listen(config.port, () => {
   console.log(`Server running at ${config.url}`);

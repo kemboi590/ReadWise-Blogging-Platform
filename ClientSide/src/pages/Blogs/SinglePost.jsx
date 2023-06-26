@@ -6,7 +6,6 @@ import { Context } from "./../../context/userContext/Context";
 import { FaThumbsUp } from "react-icons/fa";
 import { FaComment } from "react-icons/fa";
 import Comments from "./Comments";
-// import css
 import "./SinglePost.css";
 
 function SinglePost() {
@@ -17,6 +16,7 @@ function SinglePost() {
   const [liked, setLiked] = useState(false);
   const textareaRef = useRef(null);
 
+  //FETCH SINGLE BLOG
   const fetchSingleBlog = async () => {
     try {
       const res = await Axios.get(`${apidomain}/blogs/${id}`, {
@@ -26,14 +26,14 @@ function SinglePost() {
       });
       setBlog(res.data);
       // console.log(res.data);
-      // console.log(res);
-      setLikes(res.data.Likes); //revisit
+      setLikes(res.data.Likes);
       // console.log(res.data.Likes);
     } catch (error) {
       console.log(error);
     }
   };
-  //revisit
+
+  // FOR LIKES
   const handleLike = async () => {
     try {
       if (liked) {
@@ -46,6 +46,7 @@ function SinglePost() {
         setLikes(likes - 1);
         setLiked(false);
       } else {
+        // Add the like
         await Axios.put(`${apidomain}/likes/${id}`, null, {
           headers: {
             Authorization: `${user.token}`,
@@ -59,18 +60,23 @@ function SinglePost() {
       console.log(error.message);
     }
   };
+
+  // GIVE FOCUS TO TEXTAREA
   const handleCommentIconClick = () => {
     textareaRef.current.focus();
   };
 
+  // FETCH SINGLE BLOG ON PAGE LOAD
   useEffect(() => {
     fetchSingleBlog();
   }, [id]);
 
+  // DISPLAY LOADING IF BLOG IS NULL
   if (!blog) {
     return <div>Loading...</div>;
   }
 
+  // RETURN SINGLE BLOG
   return (
     <div className="page">
       <div className="singleBlogPage">
@@ -89,11 +95,13 @@ function SinglePost() {
             <FaThumbsUp /> {likes} <p className="textLike">Like</p>
           </h3>
           <h3 className="comment" onClick={handleCommentIconClick}>
-            <FaComment /> <p className="textComment">Comment</p>
+            <FaComment />
+            <p className="textComment">Comment</p>
           </h3>
         </div>
         <div className="forComments">
-          <Comments textareaRef={textareaRef} postId={id} />
+          <h3 className="titleComment">comments</h3>
+          <Comments textareaRef={textareaRef} />
         </div>
       </div>
     </div>

@@ -2,10 +2,9 @@ import React from "react";
 import "./about.css";
 import aboutImg from "../../images/aboutUs.jpg";
 import { ImFacebook2 } from "react-icons/im";
-// import { FaSquareTwitter } from "react-icons/fa";
 import { FaTwitterSquare } from "react-icons/fa";
 import { FaInstagramSquare } from "react-icons/fa";
-import {FaLinkedin} from "react-icons/fa";
+import { FaLinkedin } from "react-icons/fa";
 
 function About() {
   return (

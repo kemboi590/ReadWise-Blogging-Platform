@@ -1,5 +1,5 @@
 import React from "react";
-import {useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -12,16 +12,18 @@ import { useContext } from "react";
 import { Context } from "./../../context/userContext/Context";
 import userImg from "../../images/user.png";
 
+// SCHEMA FOR VALIDATION
 const schema = yup.object().shape({
   Coment: yup.string().required("comment is required"),
 });
 
-function Comments({ textareaRef, postId }) {
-  const { id } = useParams();
-  const { user } = useContext(Context);
-  const [commentsDetails, setCommentsDetails] = useState([]);
-  
+// COMMENTS COMPONENT
+function Comments({ textareaRef }) {
+  const { id } = useParams(); // id of the blog
+  const { user } = useContext(Context); // user details
+  const [commentsDetails, setCommentsDetails] = useState([]); // comments details
 
+  // FORM VALIDATION
   const {
     register,
     handleSubmit,
@@ -29,6 +31,7 @@ function Comments({ textareaRef, postId }) {
     reset,
   } = useForm({ resolver: yupResolver(schema) });
 
+  // FETCH COMMENTSDETAILS
   const fetchCommentsDetails = async () => {
     try {
       const res = await Axios.get(`${apidomain}/comments/${id}`, {
@@ -43,6 +46,7 @@ function Comments({ textareaRef, postId }) {
     }
   };
 
+  // ON SUBMIT OF COMMENT POST REQUEST
   const onSubmit = (data) => {
     Axios.post(`${apidomain}/comments/${id}`, data, {
       headers: {
@@ -60,14 +64,12 @@ function Comments({ textareaRef, postId }) {
     reset();
   };
 
- 
-
+  // FETCH COMMENTSDETAILS ON PAGE LOAD
   useEffect(() => {
     fetchCommentsDetails();
   }, [id]);
 
- 
-
+  // RETURN
   return (
     <div className="commentsPage">
       <div className="wrapper">
@@ -86,12 +88,13 @@ function Comments({ textareaRef, postId }) {
         ))}
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="myForm">
+      {/* FORM  */}
+      <form onSubmit={handleSubmit(onSubmit)} className="myFormComments">
         <textarea
+          ref={textareaRef}
           className="inputComment"
           placeholder="Write a comment"
           {...register("Coment")}
-          ref={textareaRef}
         />
 
         <p className="errorcomment">{errors.Coment?.message}</p>
