@@ -1,35 +1,19 @@
-import { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { useState, useEffect, useContext } from "react";
 import "./comments.css";
 import { IoSend } from "react-icons/io5";
 import Axios from "axios";
 import { useParams } from "react-router-dom";
 import { apidomain } from "../../utils/domain";
-import { useContext } from "react";
 import { Context } from "./../../context/userContext/Context";
 import userImg from "../../images/user.png";
 import { FaTrash } from "react-icons/fa";
 import { BsPencilFill } from "react-icons/bs";
-// SCHEMA FOR VALIDATION
-const schema = yup.object().shape({
-  Coment: yup.string().required("comment is required"),
-});
 
 // COMMENTS COMPONENT
-function Comments() {
+function Comments({ textareaRef }) {
   const { id } = useParams(); // id of the blog
   const { user } = useContext(Context); // user details
   const [commentsDetails, setCommentsDetails] = useState([]); // comments details
-
-  // FORM VALIDATION
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm({ resolver: yupResolver(schema) });
 
   // FETCH COMMENTSDETAILS
   const fetchCommentsDetails = async () => {
@@ -47,7 +31,13 @@ function Comments() {
   };
 
   // ON SUBMIT OF COMMENT POST REQUEST
-  const onSubmit = (data) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const comment = e.target.Coment.value;
+    const data = {
+      Coment: comment,
+    };
+
     Axios.post(`${apidomain}/comments/${id}`, data, {
       headers: {
         Authorization: `${user.token}`,
@@ -56,7 +46,7 @@ function Comments() {
       .then((response) => {
         console.log(response);
         fetchCommentsDetails();
-        reset();
+        e.target.reset();
       })
       .catch((response) => {
         console.log(response);
@@ -72,41 +62,42 @@ function Comments() {
   return (
     <div className="commentsPage">
       <div className="wrapper">
-        {commentsDetails.map((comment, index) => (
-          <div className="commentCard" key={index}>
-            <div className="upperWrapper">
-              <div className="commentImg">
-                <img src={userImg} alt="image" />
+        {commentsDetails &&
+          commentsDetails.map((comment, index) => (
+            <div className="commentCard" key={index}>
+              <div className="upperWrapper">
+                <div className="commentImg">
+                  <img src={userImg} alt="image" />
+                </div>
+                <p className="userComment"> {comment.UserName} </p>
+                <p className="timeComment"> {comment.CreatedAt} </p>
               </div>
-              <p className="userComment"> {comment.UserName} </p>
-              <p className="timeComment"> {comment.CreatedAt} </p>
-            </div>
 
-            <p className="comment"> {comment.Coment} </p>
+              <p className="comment"> {comment.Coment} </p>
 
-            <div className="EditDelete">
-              <h4 className="edit">
-                <BsPencilFill />
-                <p className="editText">Edit</p>
-              </h4>
-              <h4 className="deleteComment">
-                <FaTrash />
-                <p className="deleteText">Delete</p>
-              </h4>
+              <div className="EditDelete">
+                <h4 className="edit">
+                  <BsPencilFill />
+                  <p className="editText">Edit</p>
+                </h4>
+                <h4 className="deleteComment">
+                  <FaTrash />
+                  <p className="deleteText">Delete</p>
+                </h4>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
 
       {/* FORM  */}
-      <form onSubmit={handleSubmit(onSubmit)} className="myFormComments">
+      <form onSubmit={handleSubmit} className="myFormComments">
         <textarea
           className="inputComment"
           placeholder="Write a comment"
-          {...register("Coment")}
+          name="Coment"
+          ref={textareaRef}
         />
 
-        <p className="errorcomment">{errors.Coment?.message} </p>
         <button type="submit" className="sbmtComment">
           {<IoSend />}
         </button>

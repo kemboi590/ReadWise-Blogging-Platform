@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useRef, useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import Axios from "axios";
 import { apidomain } from "./../../utils/domain";
@@ -17,6 +17,7 @@ function SinglePost() {
   const [blog, setBlog] = useState(null);
   const [likes, setLikes] = useState(blog?.likes || 0);
   const [liked, setLiked] = useState(false);
+  const textareaRef = useRef(null);
 
   //FETCH SINGLE BLOG
   const fetchSingleBlog = async () => {
@@ -63,6 +64,11 @@ function SinglePost() {
     }
   };
 
+  // GIVE FOCUS TO TEXTAREA
+  const handleCommentIconClick = () => {
+    textareaRef.current.focus();
+  };
+
   // FETCH SINGLE BLOG ON PAGE LOAD
   useEffect(() => {
     fetchSingleBlog();
@@ -91,7 +97,7 @@ function SinglePost() {
           <h3 className="like" onClick={handleLike}>
             <FaThumbsUp /> {likes} <p className="textLike">Like</p>
           </h3>
-          <h3 className="comment">
+          <h3 className="comment" onClick={handleCommentIconClick}>
             <FaComment />
             <p className="textComment">Comment</p>
           </h3>
@@ -109,7 +115,7 @@ function SinglePost() {
         </div>
         <div className="forComments">
           <h3 className="titleComment">comments</h3>
-          <Comments />
+          <Comments textareaRef={textareaRef} />
         </div>
       </div>
     </div>
