@@ -1,20 +1,22 @@
-import React, { useRef, useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import Axios from "axios";
 import { apidomain } from "./../../utils/domain";
 import { Context } from "./../../context/userContext/Context";
 import { FaThumbsUp } from "react-icons/fa";
 import { FaComment } from "react-icons/fa";
+import { FaTrash } from "react-icons/fa";
+import { BsPencilFill } from "react-icons/bs";
 import Comments from "./Comments";
 import "./SinglePost.css";
 
+// SINGLE POST COMPONENT
 function SinglePost() {
   const { user } = useContext(Context);
   const { id } = useParams();
   const [blog, setBlog] = useState(null);
   const [likes, setLikes] = useState(blog?.likes || 0);
   const [liked, setLiked] = useState(false);
-  const textareaRef = useRef(null);
 
   //FETCH SINGLE BLOG
   const fetchSingleBlog = async () => {
@@ -61,11 +63,6 @@ function SinglePost() {
     }
   };
 
-  // GIVE FOCUS TO TEXTAREA
-  const handleCommentIconClick = () => {
-    textareaRef.current.focus();
-  };
-
   // FETCH SINGLE BLOG ON PAGE LOAD
   useEffect(() => {
     fetchSingleBlog();
@@ -94,14 +91,25 @@ function SinglePost() {
           <h3 className="like" onClick={handleLike}>
             <FaThumbsUp /> {likes} <p className="textLike">Like</p>
           </h3>
-          <h3 className="comment" onClick={handleCommentIconClick}>
+          <h3 className="comment">
             <FaComment />
             <p className="textComment">Comment</p>
           </h3>
+
+          <div className="deleteEditPost">
+            <h3 className="edit">
+              <BsPencilFill />
+              <p className="editText">Edit</p>
+            </h3>
+            <h3 className="deleteComment">
+              <FaTrash />
+              <p className="deleteText">Delete</p>
+            </h3>
+          </div>
         </div>
         <div className="forComments">
           <h3 className="titleComment">comments</h3>
-          <Comments textareaRef={textareaRef} />
+          <Comments />
         </div>
       </div>
     </div>

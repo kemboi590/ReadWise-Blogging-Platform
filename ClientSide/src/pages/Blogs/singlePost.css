@@ -4,9 +4,7 @@
   border: 1px solid rgba(0, 0, 0, 0.704);
   margin: 1rem auto;
   border-radius: 4px;
-  /* box shadow */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.58);
-  /* line spacing */
   line-height: 1.5;
 
   padding: 2rem;
@@ -31,7 +29,6 @@
   margin: 3rem 2rem;
   gap: 4rem;
   padding: 1rem;
-  /* border at the top and bottom */
   border-top: 1px solid rgba(0, 0, 0, 0.404);
   border-bottom: 1px solid rgba(0, 0, 0, 0.404);
 }
@@ -66,5 +63,21 @@
   font-size: 17px;
 }
 .textComment {
+  font-size: 17px;
+}
+
+.deleteEditPost {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin-left: auto;
+  margin-right: 1rem;
+}
+
+.editText {
+  font-size: 17px;
+}
+.deleteText {
   font-size: 17px;
 }

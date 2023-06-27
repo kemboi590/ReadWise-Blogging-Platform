@@ -85,3 +85,11 @@
   padding: 10px;
   text-align: center;
 }
+
+.EditDelete {
+  display: flex;
+  gap: 2rem;
+  justify-content: flex-end;
+  margin-right: 20px;
+  margin-bottom: 10px;
+}

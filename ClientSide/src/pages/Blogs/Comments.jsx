@@ -1,5 +1,4 @@
-import React from "react";
-import { useRef, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -11,14 +10,15 @@ import { apidomain } from "../../utils/domain";
 import { useContext } from "react";
 import { Context } from "./../../context/userContext/Context";
 import userImg from "../../images/user.png";
-
+import { FaTrash } from "react-icons/fa";
+import { BsPencilFill } from "react-icons/bs";
 // SCHEMA FOR VALIDATION
 const schema = yup.object().shape({
   Coment: yup.string().required("comment is required"),
 });
 
 // COMMENTS COMPONENT
-function Comments({ textareaRef }) {
+function Comments() {
   const { id } = useParams(); // id of the blog
   const { user } = useContext(Context); // user details
   const [commentsDetails, setCommentsDetails] = useState([]); // comments details
@@ -56,12 +56,11 @@ function Comments({ textareaRef }) {
       .then((response) => {
         console.log(response);
         fetchCommentsDetails();
+        reset();
       })
       .catch((response) => {
         console.log(response);
       });
-
-    reset();
   };
 
   // FETCH COMMENTSDETAILS ON PAGE LOAD
@@ -84,6 +83,17 @@ function Comments({ textareaRef }) {
             </div>
 
             <p className="comment"> {comment.Coment} </p>
+
+            <div className="EditDelete">
+              <h4 className="edit">
+                <BsPencilFill />
+                <p className="editText">Edit</p>
+              </h4>
+              <h4 className="deleteComment">
+                <FaTrash />
+                <p className="deleteText">Delete</p>
+              </h4>
+            </div>
           </div>
         ))}
       </div>
@@ -91,13 +101,12 @@ function Comments({ textareaRef }) {
       {/* FORM  */}
       <form onSubmit={handleSubmit(onSubmit)} className="myFormComments">
         <textarea
-          ref={textareaRef}
           className="inputComment"
           placeholder="Write a comment"
           {...register("Coment")}
         />
 
-        <p className="errorcomment">{errors.Coment?.message}</p>
+        <p className="errorcomment">{errors.Coment?.message} </p>
         <button type="submit" className="sbmtComment">
           {<IoSend />}
         </button>
