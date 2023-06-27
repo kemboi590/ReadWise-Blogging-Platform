@@ -35,7 +35,7 @@ function SinglePost() {
         },
       });
       setBlog(res.data);
-      // console.log(res.data);
+      console.log(res.data);
       setLikes(res.data.Likes);
       // console.log(res.data.Likes);
     } catch (error) {
@@ -81,6 +81,21 @@ function SinglePost() {
     fetchSingleBlog();
   }, [id]);
 
+  // DELETE POST
+  const handleDelete = async (id) => {
+    try {
+      const response = await Axios.delete(`${apidomain}/blogs/${id}`, {
+        headers: {
+          Authorization: `${user.token}`,
+        },
+      });
+      navigate("/blogs");
+      alert(response.data);
+    } catch (response) {
+      alert("Ops! Something went wrong. Please try again la");
+    }
+  };
+
   // DISPLAY LOADING IF BLOG IS NULL
   if (!blog) {
     return <div>Loading...</div>;
@@ -93,6 +108,9 @@ function SinglePost() {
         <div>
           <h2 className="SingleblogTitle">{blog.Title}</h2>
           <p className="SingleDescription">{blog.BlogDesc}</p>
+          <p className="blogauthor">
+            <i>Created By:</i> <b>{blog.UserName} </b> {blog.CreatedAt}
+          </p>
         </div>
         <div>
           <p
@@ -109,9 +127,10 @@ function SinglePost() {
             <p className="textComment">Comment</p>
           </h3>
 
+          {/* DELETE & EDIT */}
           <div className="deleteEditPost">
             <h3 className="back" onClick={goBack}>
-              <RiArrowGoBackFill  className="backIcon"/>
+              <RiArrowGoBackFill className="backIcon" />
               <p className="ptag">Back</p>
             </h3>
             <h3 className="edit">
@@ -119,7 +138,7 @@ function SinglePost() {
               <p className="ptag">Edit</p>
             </h3>
             <h3 className="deleteComment">
-              <FaTrash />
+              <FaTrash onClick={() => handleDelete(blog.PostID)} />
               <p className="ptag">Delete</p>
             </h3>
           </div>

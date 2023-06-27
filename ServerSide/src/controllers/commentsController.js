@@ -9,7 +9,7 @@ export const getComments = async (req, res) => {
     const result = await pool
       .request()
       .input("id", sql.VarChar, id)
-      .query("EXEC GetCommentDetails @PostID = @id");
+      .query("EXEC CommentDetails @PostID = @id");
     res.status(200).json(result.recordset);
   } catch (error) {
     res.status(201).json(error.message);
@@ -21,7 +21,7 @@ export const getComments = async (req, res) => {
 //CREATE COMMENT
 export const createComment = async (req, res) => {
   try {
-    const {id} = req.params;
+    const { id } = req.params;
     const { UserID } = req.user;
 
     const { Coment, CreatedAt } = req.body;
@@ -73,7 +73,7 @@ export const deleteComment = async (req, res) => {
       .query("DELETE FROM Comments WHERE CommentID = @id");
     res.status(200).json("Comment deleted successfully");
   } catch (error) {
-    res.status(500).json(error.message);
+    res.status(500).json({ message: "please try later" });
   } finally {
     sql.close();
   }

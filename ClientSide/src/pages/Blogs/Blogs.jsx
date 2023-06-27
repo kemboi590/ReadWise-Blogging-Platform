@@ -24,6 +24,9 @@ function Blogs() {
     fetchBlogs();
   }, []);
   console.log(blogs);
+
+
+
   return (
     <div className="blogsPage">
       <h2 className="blogsTitle">ReadWise Blogs</h2>

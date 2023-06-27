@@ -23,6 +23,14 @@
   font-style: italic;
   padding: 0.8rem 0;
 }
+
+.blogauthor {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
 .LikeComment {
   display: flex;
   align-items: center;

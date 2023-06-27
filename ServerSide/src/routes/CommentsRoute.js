@@ -15,6 +15,6 @@ const comments = (app) => {
 
   app.route("/comments/:id").put(loginRequired, updateComment); //update comment
 
-  app.route("/comments/:id").delete(loginRequired, deleteComment); //delete comment
+  app.route("/comments/:id").delete( deleteComment); //delete comment
 };
 export default comments;

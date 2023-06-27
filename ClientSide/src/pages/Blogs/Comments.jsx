@@ -33,39 +33,51 @@ function Comments({ textareaRef }) {
   // ON SUBMIT OF COMMENT POST REQUEST
   const handleSubmit = (e) => {
     // check if comment is empty
-    if (e.target.Coment.value === "") { 
+    if (e.target.Coment.value === "") {
       e.preventDefault();
       alert("Comment cannot be empty");
-    }
-    else {
+    } else {
       e.preventDefault();
-    const comment = e.target.Coment.value;
-    const data = {
-      Coment: comment,
-    };
-    
-    
+      const comment = e.target.Coment.value;
+      const data = {
+        Coment: comment,
+      };
 
-    Axios.post(`${apidomain}/comments/${id}`, data, {
-      headers: {
-        Authorization: `${user.token}`,
-      },
-    })
-      .then((response) => {
-        console.log(response);
-        fetchCommentsDetails();
-        e.target.reset();
+      Axios.post(`${apidomain}/comments/${id}`, data, {
+        headers: {
+          Authorization: `${user.token}`,
+        },
       })
-      .catch((response) => {
-        console.log(response);
-      });
-    };
+        .then((response) => {
+          console.log(response);
+          fetchCommentsDetails();
+          e.target.reset();
+        })
+        .catch((response) => {
+          console.log(response);
+        });
+    }
   };
 
   // FETCH COMMENTSDETAILS ON PAGE LOAD
   useEffect(() => {
     fetchCommentsDetails();
   }, [id]);
+
+  // DELETE COMMENT
+  const handleDelete = async (id) => {
+    try {
+      const response = await Axios.delete(`${apidomain}/comments/${id}`, {
+        headers: {
+          Authorization: `${user.token}`,
+        },
+      });
+      fetchCommentsDetails();
+      alert(response.data);
+    } catch (response) {
+      alert("Ops! Something went wrong. Please try again la");
+    }
+  };
 
   // RETURN
   return (
@@ -81,16 +93,14 @@ function Comments({ textareaRef }) {
                 <p className="userComment"> {comment.UserName} </p>
                 <p className="timeComment"> {comment.CreatedAt} </p>
               </div>
-
               <p className="comment"> {comment.Coment} </p>
-
               <div className="EditDelete">
                 <h4 className="edit">
                   <BsPencilFill />
                   <p className="editText">Edit</p>
                 </h4>
                 <h4 className="deleteComment">
-                  <FaTrash />
+                  <FaTrash onClick={() => handleDelete(comment.CommentID)} />
                   <p className="deleteText">Delete</p>
                 </h4>
               </div>
