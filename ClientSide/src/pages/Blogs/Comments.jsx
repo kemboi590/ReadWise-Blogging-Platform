@@ -32,11 +32,19 @@ function Comments({ textareaRef }) {
 
   // ON SUBMIT OF COMMENT POST REQUEST
   const handleSubmit = (e) => {
-    e.preventDefault();
+    // check if comment is empty
+    if (e.target.Coment.value === "") { 
+      e.preventDefault();
+      alert("Comment cannot be empty");
+    }
+    else {
+      e.preventDefault();
     const comment = e.target.Coment.value;
     const data = {
       Coment: comment,
     };
+    
+    
 
     Axios.post(`${apidomain}/comments/${id}`, data, {
       headers: {
@@ -51,6 +59,7 @@ function Comments({ textareaRef }) {
       .catch((response) => {
         console.log(response);
       });
+    };
   };
 
   // FETCH COMMENTSDETAILS ON PAGE LOAD
