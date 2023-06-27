@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, useContext } from "react";
+import React, { useRef, useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Axios from "axios";
 import { apidomain } from "./../../utils/domain";
@@ -12,7 +12,6 @@ import Comments from "./Comments";
 import "./SinglePost.css";
 import UpdateQuill from "./UpdateQuill";
 
-// SINGLE POST COMPONENT
 function SinglePost() {
   const navigate = useNavigate();
   const { user } = useContext(Context);
@@ -24,12 +23,10 @@ function SinglePost() {
   const [showReactQuill, setShowReactQuill] = useState(false);
   const [tempBlogData, setTempBlogData] = useState("");
 
-  // GO BACK
   const goBack = () => {
     navigate("/blogs");
   };
 
-  //FETCH SINGLE BLOG
   const fetchSingleBlog = async () => {
     try {
       const res = await Axios.get(`${apidomain}/blogs/${id}`, {
@@ -40,17 +37,14 @@ function SinglePost() {
       setBlog(res.data);
       console.log(res.data);
       setLikes(res.data.Likes);
-      // console.log(res.data.Likes);
     } catch (error) {
       console.log(error);
     }
   };
 
-  // FOR LIKES
   const handleLike = async () => {
     try {
       if (liked) {
-        // Remove the like
         await Axios.delete(`${apidomain}/likes/${id}`, {
           headers: {
             Authorization: `${user.token}`,
@@ -59,7 +53,6 @@ function SinglePost() {
         setLikes(likes - 1);
         setLiked(false);
       } else {
-        // Add the like
         await Axios.put(`${apidomain}/likes/${id}`, null, {
           headers: {
             Authorization: `${user.token}`,
@@ -74,17 +67,14 @@ function SinglePost() {
     }
   };
 
-  // GIVE FOCUS TO TEXTAREA
   const handleCommentIconClick = () => {
     textareaRef.current.focus();
   };
 
-  // FETCH SINGLE BLOG ON PAGE LOAD
   useEffect(() => {
     fetchSingleBlog();
   }, [id]);
 
-  // DELETE POST
   const handleDelete = async (id) => {
     try {
       const response = await Axios.delete(`${apidomain}/blogs/${id}`, {
@@ -95,23 +85,20 @@ function SinglePost() {
       navigate("/blogs");
       alert(response.data);
     } catch (response) {
-      alert("Ops! Something went wrong. Please try again la");
+      alert("Oops! Something went wrong. Please try again later.");
     }
   };
 
-  // EDIT POST
   const handleEditToggle = (blog) => {
     setTempBlogData(blog);
     setShowReactQuill(!showReactQuill);
     navigate(`/updateblog/${blog.PostID}`, { state: blog });
   };
 
-  // DISPLAY LOADING IF BLOG IS NULL
   if (!blog) {
     return <div>Loading...</div>;
   }
 
-  // RETURN SINGLE BLOG
   return (
     <div className="page">
       <div className="singleBlogPage">
@@ -133,41 +120,39 @@ function SinglePost() {
             <FaThumbsUp /> {likes} <p className="textLike">Like</p>
           </h3>
           <h3 className="comment" onClick={handleCommentIconClick}>
-            <FaComment />
+            <FaComment /> {blog.comments.length}{" "}
             <p className="textComment">Comment</p>
           </h3>
-
-          {/* DELETE & EDIT */}
-          <div className="deleteEditPost">
-            <h3 className="back" onClick={goBack}>
-              <RiArrowGoBackFill className="backIcon" />
-              <p className="ptag">Back</p>
-            </h3>
-            <h3 className="edit">
+        </div>
+        <div>
+          {user && user.username === blog.UserName && (
+            <div className="adminIcons">
               <BsPencilFill
-                onClick={() => {
-                  handleEditToggle(blog);
-                }}
+                className="edit"
+                onClick={() => handleEditToggle(blog)}
               />
-              <p className="ptag">Edit</p>
-            </h3>
-            <div>
-              {showReactQuill && (
-                <div className="createMyBlog">
-                  <UpdateQuill blog={tempBlogData} />
-                </div>
-              )}
+              <FaTrash
+                className="delete"
+                onClick={() => handleDelete(blog.PostID)}
+              />
             </div>
-
-            <h3 className="deleteComment">
-              <FaTrash onClick={() => handleDelete(blog.PostID)} />
-              <p className="ptag">Delete</p>
-            </h3>
+          )}
+        </div>
+        <div>
+          <div className="backButton" onClick={goBack}>
+            <RiArrowGoBackFill /> Go Back
           </div>
         </div>
-        <div className="forComments">
-          <h3 className="titleComment">comments</h3>
-          <Comments textareaRef={textareaRef} />
+        <div className="commentsSection">
+          <h3>Comments</h3>
+          <Comments comments={blog.comments} postId={blog.PostID} />
+        </div>
+        <div>
+          {showReactQuill && (
+            <div className="createMyBlog">
+              <UpdateQuill blog={tempBlogData} />
+            </div>
+          )}
         </div>
       </div>
     </div>

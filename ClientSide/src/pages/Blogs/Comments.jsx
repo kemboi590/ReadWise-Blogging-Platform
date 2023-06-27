@@ -16,19 +16,29 @@ function Comments({ textareaRef }) {
   const [commentsDetails, setCommentsDetails] = useState([]); // comments details
 
   // FETCH COMMENTSDETAILS
-  const fetchCommentsDetails = async () => {
-    try {
-      const res = await Axios.get(`${apidomain}/comments/${id}`, {
-        headers: {
-          Authorization: `${user.token}`,
-        },
-      });
-      setCommentsDetails(res.data);
-      console.log(res.data);
-    } catch (error) {
-      console.log(error);
+const fetchCommentsDetails = async () => {
+  try {
+    const response = await Axios.get(`${apidomain}/comments/${id}`, {
+      headers: {
+        Authorization: `${user.token}`,
+      },
+    });
+    if (Array.isArray(response.data)) {
+      setCommentsDetails(response.data);
+    } else {
+      // Handle unexpected response data type
+      console.error('Invalid comments data:', response.data);
     }
-  };
+  } catch (error) {
+    console.error('Error fetching comments:', error);
+  }
+};
+    // FETCH COMMENTSDETAILS ON PAGE LOAD
+    useEffect(() => {
+      fetchCommentsDetails();
+    }, []);
+  console.log(commentsDetails)
+
 
   // ON SUBMIT OF COMMENT POST REQUEST
   const handleSubmit = (e) => {
@@ -59,10 +69,7 @@ function Comments({ textareaRef }) {
     }
   };
 
-  // FETCH COMMENTSDETAILS ON PAGE LOAD
-  useEffect(() => {
-    fetchCommentsDetails();
-  }, [id]);
+
 
   // DELETE COMMENT
   const handleDelete = async (id) => {
@@ -83,29 +90,34 @@ function Comments({ textareaRef }) {
   return (
     <div className="commentsPage">
       <div className="wrapper">
-        {commentsDetails &&
-          commentsDetails.map((comment, index) => (
-            <div className="commentCard" key={index}>
-              <div className="upperWrapper">
-                <div className="commentImg">
-                  <img src={userImg} alt="image" />
+        {commentsDetails
+          ? commentsDetails.map((comment, index) => {
+              return (
+                <div className="commentCard" key={index}>
+                  <div className="upperWrapper">
+                    <div className="commentImg">
+                      <img src={userImg} alt="image" />
+                    </div>
+                    <p className="userComment"> {comment.UserName} </p>
+                    <p className="timeComment"> {comment.CreatedAt} </p>
+                  </div>
+                  <p className="comment"> {comment.Coment} </p>
+                  <div className="EditDelete">
+                    <h4 className="edit">
+                      <BsPencilFill />
+                      <p className="editText">Edit</p>
+                    </h4>
+                    <h4 className="deleteComment">
+                      <FaTrash
+                        onClick={() => handleDelete(comment.CommentID)}
+                      />
+                      <p className="deleteText">Delete</p>
+                    </h4>
+                  </div>
                 </div>
-                <p className="userComment"> {comment.UserName} </p>
-                <p className="timeComment"> {comment.CreatedAt} </p>
-              </div>
-              <p className="comment"> {comment.Coment} </p>
-              <div className="EditDelete">
-                <h4 className="edit">
-                  <BsPencilFill />
-                  <p className="editText">Edit</p>
-                </h4>
-                <h4 className="deleteComment">
-                  <FaTrash onClick={() => handleDelete(comment.CommentID)} />
-                  <p className="deleteText">Delete</p>
-                </h4>
-              </div>
-            </div>
-          ))}
+              );
+            })
+          : null}
       </div>
 
       {/* FORM  */}

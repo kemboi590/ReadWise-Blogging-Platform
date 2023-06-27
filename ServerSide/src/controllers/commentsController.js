@@ -10,11 +10,13 @@ export const getComments = async (req, res) => {
       .request()
       .input("id", sql.VarChar, id)
       .query("EXEC CommentDetails @PostID = @id");
-    res.status(200).json(result.recordset);
+    if (result.recordset.length === 0) {
+      return res.status(201).json("No comments found");
+    } else {
+      res.status(200).json(result.recordset);
+    }
   } catch (error) {
-    res.status(201).json(error.message);
-  } finally {
-    sql.close();
+    res.status(201).json({ error: "unable to fetch coments" });
   }
 };
 
@@ -37,9 +39,7 @@ export const createComment = async (req, res) => {
       );
     res.status(200).json("Comment created successfully");
   } catch (error) {
-    res.status(201).json(error.message);
-  } finally {
-    sql.close();
+    res.status(201).json({ error: error.message });
   }
 };
 
@@ -56,7 +56,7 @@ export const updateComment = async (req, res) => {
       .query("UPDATE Comments SET Coment = @Coment WHERE CommentID = @id");
     res.status(200).json("Comment updated successfully");
   } catch (error) {
-    res.status(500).json(error.message);
+    res.status(500).json({ error: error.message });
   } finally {
     sql.close();
   }
@@ -73,7 +73,7 @@ export const deleteComment = async (req, res) => {
       .query("DELETE FROM Comments WHERE CommentID = @id");
     res.status(200).json("Comment deleted successfully");
   } catch (error) {
-    res.status(500).json({ message: "please try later" });
+    res.status(500).json({ error: error.message });
   } finally {
     sql.close();
   }

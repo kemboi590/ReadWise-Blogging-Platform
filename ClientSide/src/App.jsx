@@ -16,7 +16,7 @@ import QuillEditor from "./pages/Blogs/QuillEditor";
 import Profile from "./pages/profile/Profile";
 import Logout from "./pages/Logout/Logout";
 import SinglePost from "./pages/Blogs/SinglePost";
-// import Comments from "./pages/Blogs/Comments";
+import UpdateQuill from "./pages/Blogs/UpdateQuill";
 
 // import context
 import { useContext } from "react";
@@ -42,6 +42,7 @@ function App() {
           <Route path="/profile" element={user ? <Profile /> : <Login />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="/blog/:id" element={<SinglePost />} />
+          <Route path="/updateblog/:id" element={<UpdateQuill />} />
 
           <Route path="*" element={<NotFound />} />
         </Routes>
