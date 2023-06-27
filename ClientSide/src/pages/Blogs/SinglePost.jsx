@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Axios from "axios";
 import { apidomain } from "./../../utils/domain";
 import { Context } from "./../../context/userContext/Context";
@@ -7,17 +7,24 @@ import { FaThumbsUp } from "react-icons/fa";
 import { FaComment } from "react-icons/fa";
 import { FaTrash } from "react-icons/fa";
 import { BsPencilFill } from "react-icons/bs";
+import { RiArrowGoBackFill } from "react-icons/ri";
 import Comments from "./Comments";
 import "./SinglePost.css";
 
 // SINGLE POST COMPONENT
 function SinglePost() {
+  const navigate = useNavigate();
   const { user } = useContext(Context);
   const { id } = useParams();
   const [blog, setBlog] = useState(null);
   const [likes, setLikes] = useState(blog?.likes || 0);
   const [liked, setLiked] = useState(false);
   const textareaRef = useRef(null);
+
+  // GO BACK
+  const goBack = () => {
+    navigate("/blogs");
+  };
 
   //FETCH SINGLE BLOG
   const fetchSingleBlog = async () => {
@@ -103,13 +110,17 @@ function SinglePost() {
           </h3>
 
           <div className="deleteEditPost">
+            <h3 className="back" onClick={goBack}>
+              <RiArrowGoBackFill  className="backIcon"/>
+              <p className="ptag">Back</p>
+            </h3>
             <h3 className="edit">
               <BsPencilFill />
-              <p className="editText">Edit</p>
+              <p className="ptag">Edit</p>
             </h3>
             <h3 className="deleteComment">
               <FaTrash />
-              <p className="deleteText">Delete</p>
+              <p className="ptag">Delete</p>
             </h3>
           </div>
         </div>
