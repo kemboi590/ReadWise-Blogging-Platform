@@ -1,11 +1,11 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Context } from "../../context/userContext/Context";
 import Axios from "axios";
 import { apidomain } from "../../utils/domain";
-import "./quillEditor.css";
+import "./updateQuill.css";
 
 const modules = {
   toolbar: [
@@ -36,32 +36,14 @@ const formats = [
   "image",
 ];
 
-function UpdateQuill({ blog }) {
-  
+function UpdateQuill({ blog, setShowReactQuill }) {
+ 
   const { user } = useContext(Context);
   const navigate = useNavigate();
-  const [Title, setTitle] = useState("");
-  const [BlogDesc, setDescription] = useState("");
-  const [Content, setContent] = useState("");
 
-  // const [Title, setTitle] = useState(blog.Title);
-  // const [BlogDesc, setDescription] = useState(blog.BlogDesc);
-  // const [Content, setContent] = useState(blog.Content);
-  // useEffect(() => {
-  //   if (blog) {
-  //     setTitle(blog.Title);
-  //     setDescription(blog.BlogDesc);
-  //     setContent(blog.Content);
-  //   }
-  // }, [blog]);
-  useEffect(() => {
-    if (blog) {
-      setTitle(blog.Title);
-      setDescription(blog.BlogDesc);
-      setContent(blog.Content);
-    }
-  }, [blog]);
-  
+  const [Title, setTitle] = useState(blog.Title);
+  const [BlogDesc, setDescription] = useState(blog.BlogDesc);
+  const [Content, setContent] = useState(blog.Content);
 
   const handleEditorChange = (content) => {
     setContent(content);
@@ -96,8 +78,10 @@ function UpdateQuill({ blog }) {
   };
 
   return (
-    <div className="createMyBlog">
+    <div className="updateMyBlog">
       {!user ? navigate("/login") : null}
+
+      <h2 className="edityourblog">Edit Your Blog</h2>
 
       <label htmlFor="Title" className="name">
         Give a Title to your Blog
@@ -107,7 +91,6 @@ function UpdateQuill({ blog }) {
         id="title"
         value={Title}
         onChange={(e) => setTitle(e.target.value)}
-        // onChange={(e) => setTitle(e.target.value)}
       />
 
       <label htmlFor="BlogDesc" className="name">
@@ -118,7 +101,6 @@ function UpdateQuill({ blog }) {
         id="description"
         value={BlogDesc}
         onChange={(e) => setDescription(e.target.value)}
-        // onChange={(e) => setDescription(e.target.value)}
       />
 
       <div className="myEditor">
@@ -131,11 +113,16 @@ function UpdateQuill({ blog }) {
         />
       </div>
 
-      <button onClick={handleClick} className="sbtBtb">
-        Submit
-      </button>
+      <div className="wrapBTN">
+        {/* set show to false */}
+        <button className="closeBtn" onClick={()=> setShowReactQuill(false)} > Close</button>
+        <button onClick={handleClick} className="sbtBtb">
+          Submit
+        </button>
+      </div>
     </div>
   );
 }
 
 export default UpdateQuill;
+// great

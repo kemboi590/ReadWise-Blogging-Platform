@@ -22,14 +22,13 @@ function SinglePost() {
   const [liked, setLiked] = useState(false);
   const textareaRef = useRef(null);
   const [showReactQuill, setShowReactQuill] = useState(false);
-  const [tempBlogData, setTempBlogData] = useState([]);
 
   // GO BACK
   const goBack = () => {
     navigate("/blogs");
   };
 
-  //FETCH SINGLE BLOG
+  // FETCH SINGLE BLOG
   const fetchSingleBlog = async () => {
     try {
       const res = await Axios.get(`${apidomain}/blogs/${id}`, {
@@ -38,11 +37,9 @@ function SinglePost() {
         },
       });
       setBlog(res.data);
-      // console.log(res.data);
       setLikes(res.data.Likes);
-      // console.log(res.data.Likes);
-    } catch (res) {
-      console.log(res);
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -67,7 +64,6 @@ function SinglePost() {
         });
         setLikes(likes + 1);
         setLiked(true);
-        console.log(likes + 1);
       }
     } catch (error) {
       console.log(error.message);
@@ -94,22 +90,15 @@ function SinglePost() {
       });
       navigate("/blogs");
       alert(response.data);
-    } catch (response) {
-      alert("Ops! Something went wrong. Please try again la");
+    } catch (error) {
+      alert("Oops! Something went wrong. Please try again later.");
     }
   };
 
   // EDIT POST
-  const handleEditToggle = (blog) => {
-    setTempBlogData(blog);
+  const handleEditToggle = () => {
     setShowReactQuill(!showReactQuill);
-    navigate(`/updateblog/${blog.PostID}`, { state: blog });
   };
-
-  // DISPLAY LOADING IF BLOG IS NULL
-  if (!blog) {
-    return <div>Loading...</div>;
-  }
 
   // RETURN SINGLE BLOG
   return (
@@ -144,31 +133,23 @@ function SinglePost() {
               <p className="ptag">Back</p>
             </h3>
             <h3 className="edit">
-              <BsPencilFill
-                onClick={() => {
-                  handleEditToggle(blog);
-                }}
-              />
+              <BsPencilFill onClick={() => handleEditToggle(blog)} />
               <p className="ptag">Edit</p>
             </h3>
-            <div>
-              {showReactQuill && (
-                <div>
-                  <UpdateQuill blog={tempBlogData} />
-                </div>
-              )}
-            </div>
 
+    
             <h3 className="deleteComment">
               <FaTrash onClick={() => handleDelete(blog.PostID)} />
               <p className="ptag">Delete</p>
             </h3>
           </div>
         </div>
+                              {/* UPDATE BLOG */}
+        <div>
+        {showReactQuill && <UpdateQuill blog={blog} setShowReactQuill={setShowReactQuill} />}
+        </div>
         <div className="forComments">
           <h3 className="titleComment">comments</h3>
-          {/* call Coments if fetchSingleBlog has been called */}
-
           {blog && <Comments textareaRef={textareaRef} />}
         </div>
       </div>
@@ -177,3 +158,4 @@ function SinglePost() {
 }
 
 export default SinglePost;
+// greate
