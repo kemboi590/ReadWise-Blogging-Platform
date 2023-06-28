@@ -16,29 +16,25 @@ function Comments({ textareaRef }) {
   const [commentsDetails, setCommentsDetails] = useState([]); // comments details
 
   // FETCH COMMENTSDETAILS
-const fetchCommentsDetails = async () => {
-  try {
-    const response = await Axios.get(`${apidomain}/comments/${id}`, {
-      headers: {
-        Authorization: `${user.token}`,
-      },
-    });
-    if (Array.isArray(response.data)) {
-      setCommentsDetails(response.data);
-    } else {
-      // Handle unexpected response data type
-      console.error('Invalid comments data:', response.data);
-    }
-  } catch (error) {
-    console.error('Error fetching comments:', error);
-  }
-};
-    // FETCH COMMENTSDETAILS ON PAGE LOAD
-    useEffect(() => {
-      fetchCommentsDetails();
-    }, []);
-  console.log(commentsDetails)
+  const fetchCommentsDetails = async () => {
+    try {
+      const response = await Axios.get(`${apidomain}/comments/${id}`, {
+        headers: {
+          Authorization: `${user.token}`,
+        },
+      });
 
+      setCommentsDetails(response.data);
+      // console.log(response.data);
+    } catch (error) {
+      console.error("Error fetching comments:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchCommentsDetails();
+  }, []);
+  // console.log(commentsDetails);
 
   // ON SUBMIT OF COMMENT POST REQUEST
   const handleSubmit = (e) => {
@@ -69,8 +65,6 @@ const fetchCommentsDetails = async () => {
     }
   };
 
-
-
   // DELETE COMMENT
   const handleDelete = async (id) => {
     try {
@@ -81,6 +75,7 @@ const fetchCommentsDetails = async () => {
       });
       fetchCommentsDetails();
       alert(response.data);
+      console.log(response.data);
     } catch (response) {
       alert("Ops! Something went wrong. Please try again la");
     }

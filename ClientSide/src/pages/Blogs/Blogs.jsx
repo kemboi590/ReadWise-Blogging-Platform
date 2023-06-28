@@ -13,19 +13,20 @@ function Blogs() {
   const [blogs, setBlogs] = useState([]);
 
   const fetchBlogs = async () => {
-    const res = await Axios.get(`${apidomain}/blogs`, { 
+   await Axios.get(`${apidomain}/blogs`, {
       headers: {
         Authorization: `${user.token}`,
       },
-    });
-    setBlogs(res.data);
+    }).then((response) => {
+      setBlogs(response.data);
+    }).catch((response) => { 
+      console.log(response);
+    })
   };
   useEffect(() => {
     fetchBlogs();
   }, []);
-  console.log(blogs);
-
-
+  //console.log(blogs);
 
   return (
     <div className="blogsPage">

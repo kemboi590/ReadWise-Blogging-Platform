@@ -1,7 +1,7 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Context } from "../../context/userContext/Context";
 import Axios from "axios";
 import { apidomain } from "../../utils/domain";
@@ -37,11 +37,31 @@ const formats = [
 ];
 
 function UpdateQuill({ blog }) {
+  
   const { user } = useContext(Context);
   const navigate = useNavigate();
   const [Title, setTitle] = useState("");
   const [BlogDesc, setDescription] = useState("");
   const [Content, setContent] = useState("");
+
+  // const [Title, setTitle] = useState(blog.Title);
+  // const [BlogDesc, setDescription] = useState(blog.BlogDesc);
+  // const [Content, setContent] = useState(blog.Content);
+  // useEffect(() => {
+  //   if (blog) {
+  //     setTitle(blog.Title);
+  //     setDescription(blog.BlogDesc);
+  //     setContent(blog.Content);
+  //   }
+  // }, [blog]);
+  useEffect(() => {
+    if (blog) {
+      setTitle(blog.Title);
+      setDescription(blog.BlogDesc);
+      setContent(blog.Content);
+    }
+  }, [blog]);
+  
 
   const handleEditorChange = (content) => {
     setContent(content);
@@ -59,7 +79,7 @@ function UpdateQuill({ blog }) {
       Content: Content.trim(),
     };
 
-    Axios.post(`${apidomain}/blogs`, mydata, {
+    Axios.put(`${apidomain}/blogs/${blog.PostID}`, mydata, {
       headers: {
         Authorization: `${user.token}`,
       },
@@ -87,6 +107,7 @@ function UpdateQuill({ blog }) {
         id="title"
         value={Title}
         onChange={(e) => setTitle(e.target.value)}
+        // onChange={(e) => setTitle(e.target.value)}
       />
 
       <label htmlFor="BlogDesc" className="name">
@@ -97,6 +118,7 @@ function UpdateQuill({ blog }) {
         id="description"
         value={BlogDesc}
         onChange={(e) => setDescription(e.target.value)}
+        // onChange={(e) => setDescription(e.target.value)}
       />
 
       <div className="myEditor">

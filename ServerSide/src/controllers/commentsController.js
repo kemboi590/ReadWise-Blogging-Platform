@@ -10,13 +10,9 @@ export const getComments = async (req, res) => {
       .request()
       .input("id", sql.VarChar, id)
       .query("EXEC CommentDetails @PostID = @id");
-    if (result.recordset.length === 0) {
-      return res.status(201).json("No comments found");
-    } else {
-      res.status(200).json(result.recordset);
-    }
+    res.status(200).json(result.recordsets[0]);
   } catch (error) {
-    res.status(201).json({ error: "unable to fetch coments" });
+    res.status(201).json(error.message);
   }
 };
 

@@ -9,8 +9,6 @@ export const getBlogs = async (req, res) => {
     res.json(result.recordset);
   } catch (error) {
     res.status(201).json(error.message);
-  } finally {
-    sql.close();
   }
 };
 
@@ -53,8 +51,6 @@ export const getSingleBlog = async (req, res) => {
     res.status(200).json(result.recordset[0]);
   } catch (error) {
     res.status(201).json(error.message);
-  } finally {
-    sql.close();
   }
 };
 

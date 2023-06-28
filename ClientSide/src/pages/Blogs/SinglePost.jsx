@@ -17,12 +17,12 @@ function SinglePost() {
   const navigate = useNavigate();
   const { user } = useContext(Context);
   const { id } = useParams();
-  const [blog, setBlog] = useState(null);
+  const [blog, setBlog] = useState([]);
   const [likes, setLikes] = useState(blog?.likes || 0);
   const [liked, setLiked] = useState(false);
   const textareaRef = useRef(null);
   const [showReactQuill, setShowReactQuill] = useState(false);
-  const [tempBlogData, setTempBlogData] = useState("");
+  const [tempBlogData, setTempBlogData] = useState([]);
 
   // GO BACK
   const goBack = () => {
@@ -38,11 +38,11 @@ function SinglePost() {
         },
       });
       setBlog(res.data);
-      console.log(res.data);
+      // console.log(res.data);
       setLikes(res.data.Likes);
       // console.log(res.data.Likes);
-    } catch (error) {
-      console.log(error);
+    } catch (res) {
+      console.log(res);
     }
   };
 
@@ -153,7 +153,7 @@ function SinglePost() {
             </h3>
             <div>
               {showReactQuill && (
-                <div className="createMyBlog">
+                <div>
                   <UpdateQuill blog={tempBlogData} />
                 </div>
               )}
@@ -167,7 +167,9 @@ function SinglePost() {
         </div>
         <div className="forComments">
           <h3 className="titleComment">comments</h3>
-          <Comments textareaRef={textareaRef} />
+          {/* call Coments if fetchSingleBlog has been called */}
+
+          {blog && <Comments textareaRef={textareaRef} />}
         </div>
       </div>
     </div>
