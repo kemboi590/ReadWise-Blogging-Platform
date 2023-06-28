@@ -73,11 +73,14 @@ export const loginUser = async (req, res) => {
             Email: user.Email,
             UserID: user.UserID,
             UserName: user.UserName,
+
           },
           config.jwt_secret,
           { expiresIn: "1h" }
         )}`;
         res.status(200).json({
+          UserName: user.UserName,
+          Role: user.Role,
           Email: user.Email,
           UserID: user.UserID,
           token: token,
