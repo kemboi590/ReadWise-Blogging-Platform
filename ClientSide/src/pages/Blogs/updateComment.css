@@ -1,0 +1,48 @@
+.updateComment {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  height: fit-content;
+
+  align-items: center;
+  border: 1px solid rgba(54, 54, 54, 0.072);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.658);
+  padding: 10px;
+  gap: 0.6rem;
+  width: 40%;
+  margin-right: auto;
+  border-radius: 10px;
+  left: 0;
+  right: 0;
+  transform: translate(-40%, -50%);
+  margin-left: auto;
+}
+
+.inputupdateComment {
+  width: 100%;
+  border-radius: 15px;
+  border: 1px solid rgba(54, 54, 54, 0.072);
+  padding: 0.5rem 0.5rem;
+  margin: 0.5rem 0.2rem;
+  font-size: 12px;
+  font-weight: 200;
+  letter-spacing: 0.6px;
+  line-height: 1;
+  resize: none;
+  outline: none;
+}
+/* 
+  .errorcomment {
+    position: absolute;
+    bottom: 0;
+  } */
+.submitUpdate {
+  height: 40px;
+  border-radius: 5px;
+  padding: 0 1rem;
+  font-size: 10px;
+  font-weight: 300;
+  background-color: #343a40;
+  color: white;
+  cursor: pointer;
+}

@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./comments.css";
 import { IoSend } from "react-icons/io5";
 import Axios from "axios";
@@ -8,12 +8,15 @@ import { Context } from "./../../context/userContext/Context";
 import userImg from "../../images/user.png";
 import { FaTrash } from "react-icons/fa";
 import { BsPencilFill } from "react-icons/bs";
+import UpdateComment from "./UpdateComment";
 
 // COMMENTS COMPONENT
 function Comments({ textareaRef }) {
   const { id } = useParams(); // id of the blog
   const { user } = useContext(Context); // user details
   const [commentsDetails, setCommentsDetails] = useState([]); // comments details
+  const [showEditForm, setShowEditForm] = useState({}); // show edit form
+  const [tempComment, setTempComment] = useState([]); // temp comment
 
   // FETCH COMMENTSDETAILS
   const fetchCommentsDetails = async () => {
@@ -25,7 +28,6 @@ function Comments({ textareaRef }) {
       });
 
       setCommentsDetails(response.data);
-      // console.log(response.data);
     } catch (error) {
       console.error("Error fetching comments:", error);
     }
@@ -34,35 +36,36 @@ function Comments({ textareaRef }) {
   useEffect(() => {
     fetchCommentsDetails();
   }, []);
-  // console.log(commentsDetails);
+  console.log(commentsDetails);
 
   // ON SUBMIT OF COMMENT POST REQUEST
   const handleSubmit = (e) => {
+    e.preventDefault();
+
     // check if comment is empty
     if (e.target.Coment.value === "") {
-      e.preventDefault();
       alert("Comment cannot be empty");
-    } else {
-      e.preventDefault();
-      const comment = e.target.Coment.value;
-      const data = {
-        Coment: comment,
-      };
-
-      Axios.post(`${apidomain}/comments/${id}`, data, {
-        headers: {
-          Authorization: `${user.token}`,
-        },
-      })
-        .then((response) => {
-          console.log(response);
-          fetchCommentsDetails();
-          e.target.reset();
-        })
-        .catch((response) => {
-          console.log(response);
-        });
+      return;
     }
+
+    const comment = e.target.Coment.value;
+    const data = {
+      Coment: comment,
+    };
+
+    Axios.post(`${apidomain}/comments/${id}`, data, {
+      headers: {
+        Authorization: `${user.token}`,
+      },
+    })
+      .then((response) => {
+        console.log(response);
+        fetchCommentsDetails();
+        e.target.reset();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   // DELETE COMMENT
@@ -75,47 +78,53 @@ function Comments({ textareaRef }) {
       });
       fetchCommentsDetails();
       alert(response.data);
-      console.log(response.data);
-    } catch (response) {
-      alert("Ops! Something went wrong. Please try again la");
+    } catch (error) {
+      alert("Oops! Something went wrong. Please try again.");
     }
   };
 
-  // RETURN
+  // EDIT COMMENT
+  const handleCommentToggle = (comment) => {
+    setShowEditForm((prevState) => ({
+      ...prevState,
+      [comment.CommentID]: !prevState[comment.CommentID],
+    }));
+    setTempComment(comment);
+  };
+
+  // RENDER
   return (
     <div className="commentsPage">
       <div className="wrapper">
-        {commentsDetails
-          ? commentsDetails.map((comment, index) => {
-              return (
-                <div className="commentCard" key={index}>
-                  <div className="upperWrapper">
-                    <div className="commentImg">
-                      <img src={userImg} alt="image" />
-                    </div>
-                    <p className="userComment"> {comment.UserName} </p>
-                    <p className="timeComment"> {comment.CreatedAt} </p>
-                  </div>
-                  <p className="comment"> {comment.Coment} </p>
-                  <div className="EditDelete">
-                    <h4 className="edit">
-                      <BsPencilFill />
-                      <p className="editText">Edit</p>
-                    </h4>
-                    <h4 className="deleteComment">
-                      <FaTrash
-                        onClick={() => handleDelete(comment.CommentID)}
-                      />
-                      <p className="deleteText">Delete</p>
-                    </h4>
-                  </div>
+        {commentsDetails &&
+          commentsDetails.map((comment, index) => (
+            <div className="commentCard" key={index}>
+              <div className="upperWrapper">
+                <div className="commentImg">
+                  <img src={userImg} alt="image" />
                 </div>
-              );
-            })
-          : null}
+                <p className="userComment"> {comment.UserName} </p>
+                <p className="timeComment"> {comment.CreatedAt} </p>
+              </div>
+              <p className="comment"> {comment.Coment} </p>
+              <div className="EditDelete">
+                <h4 className="edit">
+                  <BsPencilFill onClick={() => handleCommentToggle(comment)} />
+                  <p className="editText">Edit</p>
+                  {showEditForm[comment.CommentID] && (
+                    <UpdateComment comment={tempComment} fetchCommentsDetails={fetchCommentsDetails} />
+                  )}
+                </h4>
+                <h4 className="deleteComment">
+                  <FaTrash onClick={() => handleDelete(comment.CommentID)} />
+                  <p className="deleteText">Delete</p>
+                </h4>
+              </div>
+            </div>
+          ))}
       </div>
 
-      {/* FORM  */}
+      {/* COMMENT FORM */}
       <form onSubmit={handleSubmit} className="myFormComments">
         <textarea
           className="inputComment"
@@ -125,7 +134,7 @@ function Comments({ textareaRef }) {
         />
 
         <button type="submit" className="sbmtComment">
-          {<IoSend />}
+          <IoSend />
         </button>
       </form>
     </div>
