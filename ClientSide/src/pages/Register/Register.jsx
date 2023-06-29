@@ -1,11 +1,9 @@
 import React from "react";
 import "./register.css";
-
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Axios from "axios";
-//import useNavigate
 import { useNavigate } from "react-router-dom";
 import { apidomain } from "../../utils/domain";
 
