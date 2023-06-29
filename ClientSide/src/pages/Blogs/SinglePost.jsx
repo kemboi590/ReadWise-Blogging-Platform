@@ -16,6 +16,7 @@ import UpdateQuill from "./UpdateQuill";
 function SinglePost() {
   const navigate = useNavigate();
   const { user } = useContext(Context);
+  console.log(user);
   const { id } = useParams();
   const [blog, setBlog] = useState([]);
   const [likes, setLikes] = useState(blog?.likes || 0);
@@ -119,7 +120,7 @@ function SinglePost() {
             dangerouslySetInnerHTML={{ __html: blog.Content }}
           ></p>
         </div>
-        
+
         <div className="LikeComment">
           <h3 className="like" onClick={handleLike}>
             <FaThumbsUp /> {likes} <p className="textLike">Like</p>
@@ -136,13 +137,25 @@ function SinglePost() {
               <p className="ptag">Back</p>
             </h3>
             <h3 className="edit">
-              <BsPencilFill onClick={() => handleEditToggle(blog)} />
-              <p className="ptag">Edit</p>
+              {user &&
+              user.UserName === blog.UserName &&
+              user.Email === blog.Email ? (
+                <>
+                  <BsPencilFill onClick={() => handleEditToggle(blog)} />
+                  <p className="ptag">Edit</p>
+                </>
+              ) : null}
             </h3>
 
             <h3 className="deleteComment">
-              <FaTrash onClick={() => handleDelete(blog.PostID)} />
-              <p className="ptag">Delete</p>
+              {user &&
+              user.UserName === blog.UserName &&
+              user.Email === blog.Email ? (
+                <>
+                  <FaTrash onClick={() => handleDelete(blog.PostID)} />
+                  <p className="ptag">Delete</p>
+                </>
+              ) : null}
             </h3>
           </div>
         </div>

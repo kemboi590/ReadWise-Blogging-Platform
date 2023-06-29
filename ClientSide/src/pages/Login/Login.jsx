@@ -66,10 +66,10 @@ function Login() {
           />
           <p>{errors.password?.message}</p>
         </>
-        <div className="toLogIn">
+        {/* <div className="toLogIn">
           <h4 className="forgotPasword">Forgot Password</h4>
           <h4 className="noAccount">Don't have an account?</h4>
-        </div>
+        </div> */}
         <input type="submit" value="LOG IN" className="submitbtn" />
       </form>
     </div>

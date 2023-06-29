@@ -14,6 +14,7 @@ import UpdateComment from "./UpdateComment";
 function Comments({ textareaRef }) {
   const { id } = useParams(); // id of the blog
   const { user } = useContext(Context); // user details
+  
   const [commentsDetails, setCommentsDetails] = useState([]); // comments details
   const [showEditForm, setShowEditForm] = useState({}); // show edit form
   const [tempComment, setTempComment] = useState([]); // temp comment
@@ -36,7 +37,7 @@ function Comments({ textareaRef }) {
   useEffect(() => {
     fetchCommentsDetails();
   }, []);
-  // console.log(commentsDetails);
+  //console.log(commentsDetails);
 
   // ON SUBMIT OF COMMENT POST REQUEST
   const handleSubmit = (e) => {
@@ -110,8 +111,14 @@ function Comments({ textareaRef }) {
               <p className="comment"> {comment.Coment} </p>
               <div className="EditDelete">
                 <h4 className="edit">
-                  <BsPencilFill onClick={() => handleCommentToggle(comment)} />
-                  <p className="editText">Edit</p>
+                  {
+                    user && user.UserID === comment.UserID ? (
+                      <>
+                        <BsPencilFill onClick={() => handleCommentToggle(comment)} />
+                        <p className="editText">Edit</p>
+                      </>
+                    ) : null
+                  }
                   {showEditForm[comment.CommentID] && (
                     <UpdateComment
                       comment={tempComment}
@@ -120,8 +127,14 @@ function Comments({ textareaRef }) {
                   )}
                 </h4>
                 <h4 className="deleteComment">
-                  <FaTrash onClick={() => handleDelete(comment.CommentID)} />
-                  <p className="deleteText">Delete</p>
+                  {user && user.UserID === comment.UserID ? (
+                    <>
+                      <FaTrash
+                        onClick={() => handleDelete(comment.CommentID)}
+                      />
+                      <p className="deleteText">Delete</p>
+                    </>
+                  ) : null}
                 </h4>
               </div>
             </div>
