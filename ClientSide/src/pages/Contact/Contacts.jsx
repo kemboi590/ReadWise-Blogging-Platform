@@ -27,6 +27,7 @@ const Contacts = () => {
   } = useForm({ resolver: yupResolver(schema) });
 
   const sendDataToServer = (data) => {
+    alert("message send successfully🥳");
     console.log(data);
     reset();
   };

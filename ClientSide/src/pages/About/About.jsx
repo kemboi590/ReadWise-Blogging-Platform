@@ -23,21 +23,21 @@ function About() {
             Earum, porro nulla iusto officia dicta asperiores aperiam debitis
             fugit hic architecto, delectus nostrum deleniti sequi ut? Officia
             dolorem assumenda distinctio quasi sunt aliquid, esse,
-            <ul className="aboutUl">
-              <li>
-                <ImFacebook2 />
-              </li>
-              <li>
-                <FaTwitterSquare />
-              </li>
-              <li>
-                <FaInstagramSquare />
-              </li>
-              <li>
-                <FaLinkedin />
-              </li>
-            </ul>
           </p>
+          <ul className="aboutUl">
+            <li>
+              <ImFacebook2 />
+            </li>
+            <li>
+              <FaTwitterSquare />
+            </li>
+            <li>
+              <FaInstagramSquare />
+            </li>
+            <li>
+              <FaLinkedin />
+            </li>
+          </ul>
         </div>
         <div className="aboutImage">
           <img src={aboutImg} alt="about" />
