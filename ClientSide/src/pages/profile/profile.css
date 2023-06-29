@@ -1,0 +1,77 @@
+.profilePage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px auto;
+  min-height: 100vh;
+  height: fit-content;
+  border: 1px solid rgba(0, 0, 0, 0.518);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  width: 50%;
+}
+.profileTitle {
+  font-size: 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.dp {
+  width: 200px;
+  border-radius: 50%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.dp img {
+  width: 100%;
+  border-radius: 50%;
+}
+.userDetails {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.518);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+.userDetails h4 {
+  padding: 10px;
+  font-size: 22px;
+  color: rgba(0, 0, 0, 0.787);
+}
+@media screen and (max-width: 860px) {
+  .profilePage {
+    width: 80%;
+  }
+  .userDetails {
+    margin-bottom: 25px;
+    padding: 10px;
+  }
+}
+@media screen and (max-width: 500px) {
+  .profilePage {
+    width: 100%;
+  }
+  .userDetails {
+    margin-bottom: 25px;
+    padding: 10px;
+  }
+  .userDetails h4 {
+    padding: 8px;
+    font-size: 18px;
+    color: rgba(0, 0, 0, 0.787);
+  }
+}
+@media screen and (max-width: 326px) {
+  .profilePage {
+    width: 100%;
+  }
+  .userDetails {
+    margin-bottom: 10px;
+    padding: 10px;
+  }
+  .userDetails h4 {
+    padding: 10px;
+    font-size: 12px;
+  }
+}

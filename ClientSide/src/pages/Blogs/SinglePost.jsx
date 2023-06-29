@@ -95,7 +95,7 @@ function SinglePost() {
     }
   };
 
-  // EDIT POST
+  // TOGGLE EDIT POST
   const handleEditToggle = () => {
     setShowReactQuill(!showReactQuill);
   };
@@ -104,6 +104,7 @@ function SinglePost() {
   return (
     <div className="page">
       <div className="singleBlogPage">
+        {/* TOP SINGLE BLOG */}
         <div>
           <h2 className="SingleblogTitle">{blog.Title}</h2>
           <p className="SingleDescription">{blog.BlogDesc}</p>
@@ -111,12 +112,14 @@ function SinglePost() {
             <i>Created By:</i> <b>{blog.UserName} </b> {blog.CreatedAt}
           </p>
         </div>
+        {/* BLOG CONTENT */}
         <div>
           <p
             className="content"
             dangerouslySetInnerHTML={{ __html: blog.Content }}
           ></p>
         </div>
+        
         <div className="LikeComment">
           <h3 className="like" onClick={handleLike}>
             <FaThumbsUp /> {likes} <p className="textLike">Like</p>
@@ -137,17 +140,20 @@ function SinglePost() {
               <p className="ptag">Edit</p>
             </h3>
 
-    
             <h3 className="deleteComment">
               <FaTrash onClick={() => handleDelete(blog.PostID)} />
               <p className="ptag">Delete</p>
             </h3>
           </div>
         </div>
-                              {/* UPDATE BLOG */}
+        {/*CALL UPDATE BLOG COMPONET*/}
         <div>
-        {showReactQuill && <UpdateQuill blog={blog} setShowReactQuill={setShowReactQuill} />}
+          {showReactQuill && (
+            <UpdateQuill blog={blog} setShowReactQuill={setShowReactQuill} />
+          )}
         </div>
+
+        {/* CALL COMMENT COMPONENT */}
         <div className="forComments">
           <h3 className="titleComment">comments</h3>
           {blog && <Comments textareaRef={textareaRef} />}
@@ -158,4 +164,4 @@ function SinglePost() {
 }
 
 export default SinglePost;
-// greate
+// great

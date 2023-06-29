@@ -6,7 +6,6 @@
   border-radius: 4px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.58);
   line-height: 1.5;
-
   padding: 2rem;
 }
 .SingleblogTitle {
@@ -88,4 +87,71 @@
 }
 .backIcon {
   font-size: 27px;
+}
+
+@media screen and (max-width: 800px) {
+  .singleBlogPage {
+    width: 90%;
+    padding: 1.5rem;
+  }
+  .SingleblogTitle {
+    margin: 1.2rem 0;
+    font-size: 25px;
+  }
+  .SingleDescription {
+    text-align: center;
+    font-size: 17x;
+    font-weight: 400;
+  }
+}
+@media screen and (max-width: 615px) {
+  .singleBlogPage {
+    width: 97%;
+    padding: 1.5rem;
+  }
+  .LikeComment {
+    margin: 3rem 1rem;
+    gap: 2rem;
+    padding: 1rem;
+  }
+  .deleteEditPost {
+    gap: 1rem;
+    margin-left: auto;
+    margin-right: 0.5rem;
+  }
+}
+@media screen and (max-width: 490px) {
+  .like {
+    font-size: 15px;
+  }
+  .comment {
+    font-size: 15px;
+  }
+  .edit {
+    font-size: 12px;
+  }
+  .deleteComment {
+    font-size: 12px;
+  }
+  .backIcon {
+    font-size: 17px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .deleteEditPost {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .LikeComment {
+    margin: 3rem 1rem;
+    gap: 0.5rem;
+    padding: 0.7rem;
+  }
+  .deleteEditPost {
+    gap: 0.5rem;
+  }
+  
 }

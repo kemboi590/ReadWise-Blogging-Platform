@@ -12,6 +12,7 @@ function UpdateComment({ comment, fetchCommentsDetails }) {
     setNewComment(comment.Coment);
   }, []);
 
+  // HANDLE UPDATE BTN
   const handleSubmit = async (e) => {
     e.preventDefault();
     await Axios.put(
@@ -25,7 +26,7 @@ function UpdateComment({ comment, fetchCommentsDetails }) {
     )
       .then((response) => {
         fetchCommentsDetails();
-        console.log(response);
+        //console.log(response);
         alert(response.data);
       })
       .catch((error) => {

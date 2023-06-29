@@ -36,7 +36,7 @@ function Comments({ textareaRef }) {
   useEffect(() => {
     fetchCommentsDetails();
   }, []);
-  console.log(commentsDetails);
+  // console.log(commentsDetails);
 
   // ON SUBMIT OF COMMENT POST REQUEST
   const handleSubmit = (e) => {
@@ -59,7 +59,7 @@ function Comments({ textareaRef }) {
       },
     })
       .then((response) => {
-        console.log(response);
+        // console.log(response);      //REVISIT
         fetchCommentsDetails();
         e.target.reset();
       })
@@ -96,6 +96,7 @@ function Comments({ textareaRef }) {
   return (
     <div className="commentsPage">
       <div className="wrapper">
+        {/* MAP */}
         {commentsDetails &&
           commentsDetails.map((comment, index) => (
             <div className="commentCard" key={index}>
@@ -112,7 +113,10 @@ function Comments({ textareaRef }) {
                   <BsPencilFill onClick={() => handleCommentToggle(comment)} />
                   <p className="editText">Edit</p>
                   {showEditForm[comment.CommentID] && (
-                    <UpdateComment comment={tempComment} fetchCommentsDetails={fetchCommentsDetails} />
+                    <UpdateComment
+                      comment={tempComment}
+                      fetchCommentsDetails={fetchCommentsDetails}
+                    />
                   )}
                 </h4>
                 <h4 className="deleteComment">

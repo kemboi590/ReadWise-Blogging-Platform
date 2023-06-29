@@ -3,6 +3,13 @@
   flex-direction: column;
   margin-top: 2rem;
   margin-bottom: 2rem;
+
+}
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
 }
 .myFormComments {
   display: flex;
@@ -17,11 +24,7 @@
   width: 60%;
   margin: 12px auto;
 }
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+
 
 .inputComment {
   width: 100%;
@@ -92,4 +95,57 @@
   justify-content: flex-end;
   margin-right: 20px;
   margin-bottom: 10px;
+}
+
+@media screen and (max-width: 660px) {
+  .myFormComments {
+    width: 90%;
+  }
+  .commentCard {
+    width: 90%;
+  }
+
+  .EditDelete {
+    gap: 1rem;
+
+    margin-right: 10px;
+  }
+  .commentImg {
+    width: 25px;
+  }
+
+  .inputComment {
+    border-radius: 15px;
+
+    margin: 0.5rem 0.2rem;
+    font-size: 10px;
+    font-weight: 200;
+    letter-spacing: 0.6px;
+    line-height: 1;
+  }
+  .sbmtComment {
+    width: 13%;
+    border-radius: 5px;
+    padding: 0 0.5rem;
+    font-size: 16px;
+    font-weight: 400;
+    background-color: #343a40;
+  }
+}
+@media screen and (max-width: 660px) {
+  .myFormComments {
+    width: 100%;
+  }
+  .commentCard {
+    width: 100%;
+  }
+  .upperWrapper {
+    display: flex;
+    border-bottom: #343a4082 solid 1px;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 2px;
+    margin-left: 10px;
+    padding-top: 5px;
+  }
 }

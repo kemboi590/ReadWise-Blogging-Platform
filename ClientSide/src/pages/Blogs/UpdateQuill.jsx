@@ -37,7 +37,6 @@ const formats = [
 ];
 
 function UpdateQuill({ blog, setShowReactQuill }) {
- 
   const { user } = useContext(Context);
   const navigate = useNavigate();
 
@@ -49,6 +48,7 @@ function UpdateQuill({ blog, setShowReactQuill }) {
     setContent(content);
   };
 
+  // ON CLICKING UPDATE BTN
   const handleClick = () => {
     if (!Title || !BlogDesc || !Content.trim()) {
       alert("Please enter all required fields");
@@ -61,13 +61,14 @@ function UpdateQuill({ blog, setShowReactQuill }) {
       Content: Content.trim(),
     };
 
+    // UPDATE
     Axios.put(`${apidomain}/blogs/${blog.PostID}`, mydata, {
       headers: {
         Authorization: `${user.token}`,
       },
     })
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         alert(response.data);
         navigate("/blogs");
       })
@@ -77,25 +78,28 @@ function UpdateQuill({ blog, setShowReactQuill }) {
       });
   };
 
+  // RETUN UPDATED BLOG
   return (
     <div className="updateMyBlog">
       {!user ? navigate("/login") : null}
 
       <h2 className="edityourblog">Edit Your Blog</h2>
-
+      {/* FOR TITLE */}
       <label htmlFor="Title" className="name">
         Give a Title to your Blog
       </label>
+
       <input
         type="text"
         id="title"
         value={Title}
         onChange={(e) => setTitle(e.target.value)}
       />
-
+      {/* FOR DESC */}
       <label htmlFor="BlogDesc" className="name">
         Give a Description to your Blog
       </label>
+
       <input
         type="text"
         id="description"
@@ -115,9 +119,11 @@ function UpdateQuill({ blog, setShowReactQuill }) {
 
       <div className="wrapBTN">
         {/* set show to false */}
-        <button className="closeBtn" onClick={()=> setShowReactQuill(false)} > Close</button>
+        <button className="closeBtn" onClick={() => setShowReactQuill(false)}>
+          Close
+        </button>
         <button onClick={handleClick} className="sbtBtb">
-          Submit
+          Update
         </button>
       </div>
     </div>
