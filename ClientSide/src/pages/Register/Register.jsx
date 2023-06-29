@@ -66,14 +66,14 @@ function Register() {
           />
           <p>{errors.Email?.message}</p>
         </>
-
+        
         <>
-          <input
-            className="inputFieldLogin"
-            type="text"
-            placeholder="Your Role"
-            {...register("Role")}
-          />
+        <label htmlFor="Role"></label>
+        <select id="Role" {...register("Role")}>
+          <option value="">Select Role</option>
+          <option value="Author">Author</option>
+          <option value="Reader">Reader</option>
+        </select>
           <p>{errors.Role?.message}</p>
         </>
 
@@ -86,6 +86,7 @@ function Register() {
           />
           <p>{errors.password?.message}</p>
         </>
+
         <>
           <input
             className="inputFieldLogin"
